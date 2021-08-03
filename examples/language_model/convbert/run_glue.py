@@ -293,12 +293,23 @@ def do_train(args):
         dev_ds = load_dataset('glue', args.task_name, splits='dev')
         dev_ds = dev_ds.map(trans_func, lazy=True)
         dev_batch_sampler = paddle.io.BatchSampler(
-            dev_ds, batch_size=args.batch_size, shuffle=False)
+            dev_ds, batch_size=args.batch_size*2, shuffle=False)
         dev_data_loader = DataLoader(
             dataset=dev_ds,
             batch_sampler=dev_batch_sampler,
             collate_fn=batchify_fn,
-            num_workers=0,
+            num_workers=2,
+            return_list=True)
+
+        test_ds = load_dataset('glue', args.task_name, splits='test')
+        test_ds = test_ds.map(trans_func, lazy=True)
+        test_batch_sampler = paddle.io.BatchSampler(
+            dev_ds, batch_size=args.batch_size*2, shuffle=False)
+        test_data_loader = DataLoader(
+            dataset=dev_ds,
+            batch_sampler=test_batch_sampler,
+            collate_fn=batchify_fn,
+            num_workers=2,
             return_list=True)
 
     num_classes = 1 if train_ds.label_list == None else len(train_ds.label_list)
@@ -362,7 +373,10 @@ def do_train(args):
                              dev_data_loader_mismatched)
                     print("eval done total : %s s" % (time.time() - tic_eval))
                 else:
+                    print("============Dev Dataset============")
                     evaluate(model, loss_fct, metric, dev_data_loader)
+                    print("============Test Dataset============")
+                    evaluate(model, loss_fct, metric, test_data_loader)
                     print("eval done total : %s s" % (time.time() - tic_eval))
                 if paddle.distributed.get_rank() == 0:
                     output_dir = os.path.join(args.output_dir,
