@@ -91,10 +91,10 @@ python -u examples/language_model/convbert/run_pretrain.py \
 
 #### **使用Paddle提供的预训练模型运行 Fine-tuning**
 
-以 GLUE/SST-2 任务为例，启动 Fine-tuning 的方式如下：
+以 GLUE/QNLI 任务为例，启动 Fine-tuning 的方式如下：
 ```shell
 export CUDA_VISIBLE_DEVICES=0
-export TASK_NAME=SST-2
+export TASK_NAME=QNLI
 
 python -u examples/language_model/convbert/run_glue.py \
     --model_type convbert \
@@ -143,22 +143,86 @@ global step 792/792, epoch: 2, batch: 263, rank_id: 0, loss: 0.025735, lr: 0.000
 eval loss: 0.226449, acc: 0.9013761467889908, eval done total : 0.5103530883789062 s
 ```
 
-使用convbert-small预训练模型进行单卡Fine-tuning ，在验证集上有如下结果（这里各类任务的结果是运行1次的结果）：
+对于 SQuAD v1.1,按如下方式启动 Fine-tuning:
 
-| Task  | Metric                       | Result      |
-|-------|------------------------------|-------------|
-| CoLA  | Matthews corr                | 56.22       |
-| SST-2 | acc.                         | 91.39       |
-| MRPC  | acc./F1                      | 87.70       |
-| STS-B | Pearson/Spearman corr        | 86.34       |
-| QQP   | acc./F1                      | 85.47       |
-| MNLI  | matched acc./mismatched acc. | 81.87       |
-| QNLI  | acc.                         | 87.71       |
-| RTE   | acc.                         | 66.06       |
+```shell
+unset CUDA_VISIBLE_DEVICES
+python -m paddle.distributed.launch --gpus "0" examples/language_model/convbert/squad/run_squad.py \
+    --model_type convbert \
+    --model_name_or_path convbert-base \
+    --max_seq_length 384 \
+    --batch_size 12 \
+    --learning_rate 3e-5 \
+    --num_train_epochs 2 \
+    --logging_steps 1000 \
+    --save_steps 1000 \
+    --warmup_proportion 0.1 \
+    --weight_decay 0.01 \
+    --output_dir ./tmp/squad/ \
+    --device gpu \
+    --do_train \
+    --do_predict
+ ```
 
-注：acc.是Accuracy的简称，表中Metric字段名词取自[GLUE论文](https://openreview.net/pdf?id=rJ4km2R5t7)
+* `model_type`: 预训练模型的种类。如bert，ernie，roberta等。
+* `model_name_or_path`: 预训练模型的具体名称。如bert-base-uncased，bert-large-cased等。或者是模型文件的本地路径。
+* `output_dir`: 保存模型checkpoint的路径。
+* `do_train`: 是否进行训练。
+* `do_predict`: 是否进行预测。
 
+训练结束后模型会自动对结果进行评估，得到类似如下的输出：
 
+```text
+{
+  "exact": 81.18259224219489,
+  "f1": 88.68817481234801,
+  "total": 10570,
+  "HasAns_exact": 81.18259224219489,
+  "HasAns_f1": 88.68817481234801,
+  "HasAns_total": 10570
+}
+```
 
-## Reference
-[Zihang Jiang, Weihao Yu, Daquan Zhou, Yunpeng Chen, Jiashi Feng, Shuicheng Yan. ConvBERT: Improving BERT with Span-based Dynamic Convolution. In NeurIPS 2020](https://arxiv.org/abs/2008.02496)
+对于 SQuAD v2.0,按如下方式启动 Fine-tuning:
+
+```shell
+unset CUDA_VISIBLE_DEVICES
+python -m paddle.distributed.launch --gpus "0" examples/language_model/convbert/squad/run_squad.py \
+    --model_type bert \
+    --model_name_or_path bert-base-uncased \
+    --max_seq_length 384 \
+    --batch_size 12 \
+    --learning_rate 3e-5 \
+    --num_train_epochs 2 \
+    --logging_steps 1000 \
+    --save_steps 1000 \
+    --warmup_proportion 0.1 \
+    --weight_decay 0.01 \
+    --output_dir ./tmp/squad/ \
+    --device gpu \
+    --do_train \
+    --do_predict \
+    --version_2_with_negative
+ ```
+
+* `version_2_with_negative`: 使用squad2.0数据集和评价指标的标志。
+
+训练结束后会在模型会自动对结果进行评估，得到类似如下的输出：
+
+```text
+{
+  "exact": 73.25865408910974,
+  "f1": 76.63096554166046,
+  "total": 11873,
+  "HasAns_exact": 73.22874493927125,
+  "HasAns_f1": 79.98303877802545,
+  "HasAns_total": 5928,
+  "NoAns_exact": 73.28847771236333,
+  "NoAns_f1": 73.28847771236333,
+  "NoAns_total": 5945,
+  "best_exact": 74.31988545439232,
+  "best_exact_thresh": -2.5820093154907227,
+  "best_f1": 77.20521797731851,
+  "best_f1_thresh": -1.559523582458496
+}
+```
