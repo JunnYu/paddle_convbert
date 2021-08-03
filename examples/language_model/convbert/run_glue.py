@@ -192,17 +192,17 @@ def evaluate(model, loss_fct, metric, data_loader):
                 res[1],
                 res[2],
                 res[3],
-                res[4], ),
-            end='')
+                res[4], )
+            )
     elif isinstance(metric, Mcc):
-        print("eval loss: %f, mcc: %s, " % (loss.numpy(), res[0]), end='')
+        print("eval loss: %f, mcc: %s, " % (loss.numpy(), res[0]))
     elif isinstance(metric, PearsonAndSpearman):
         print(
             "eval loss: %f, pearson: %s, spearman: %s, pearson and spearman: %s, "
             % (loss.numpy(), res[0], res[1], res[2]),
             end='')
     else:
-        print("eval loss: %f, acc: %s, " % (loss.numpy(), res), end='')
+        print("eval loss: %f, acc: %s, " % (loss.numpy(), res))
     model.train()
 
 
@@ -304,9 +304,9 @@ def do_train(args):
         test_ds = load_dataset('glue', args.task_name, splits='test')
         test_ds = test_ds.map(trans_func, lazy=True)
         test_batch_sampler = paddle.io.BatchSampler(
-            dev_ds, batch_size=args.batch_size*2, shuffle=False)
+            test_ds, batch_size=args.batch_size*2, shuffle=False)
         test_data_loader = DataLoader(
-            dataset=dev_ds,
+            dataset=test_ds,
             batch_sampler=test_batch_sampler,
             collate_fn=batchify_fn,
             num_workers=2,
