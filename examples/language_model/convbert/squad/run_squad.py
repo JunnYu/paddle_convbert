@@ -34,11 +34,11 @@ from paddlenlp.metrics.squad import squad_evaluate, compute_prediction
 from paddlenlp.datasets import load_dataset
 
 class ConvBertForQuestionAnswering(ConvBertPretrainedModel):
-    def __init__(self, convbert, dropout=None):
+    def __init__(self, convbert):
         super(ConvBertForQuestionAnswering, self).__init__()
-        self.convbert = convbert  # allow bert to be config
-        self.classifier = nn.Linear(self.bert.config["hidden_size"], 2)
-        self.apply(self.init_weights)
+        self.convbert = convbert  # allow convbert to be config
+        self.classifier = nn.Linear(self.convbert.config["hidden_size"], 2)
+        self.init_weights()
 
     def forward(self, input_ids, token_type_ids=None):
         sequence_output, _ = self.convbert(
