@@ -20,6 +20,7 @@
 ~~~bash
 cd paddlenlp
 # 本地安装
+pip install -r requirements.txt
 pip install -e .
 ~~~
 
