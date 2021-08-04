@@ -128,7 +128,7 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
     --max_seq_length 128 \
     --batch_size 32   \
     --learning_rate 1e-4 \
-    --scheduler_type cosine \ 
+    --scheduler_type cosine \
     --layer_lr_decay 0.8 \
     --weight_decay 0.01 \
     --warmup_proportion 0.1 \
