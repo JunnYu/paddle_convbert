@@ -17,12 +17,12 @@ def parse_args():
         help="Predict data path.")
     parser.add_argument(
         "--model_type",
-        default="bert",
+        default="convbert",
         type=str,
         help="Type of pre-trained model.")
     parser.add_argument(
         "--model_name_or_path",
-        default="bert-base-uncased",
+        default="convbert-base",
         type=str,
         help="Path to pre-trained model or shortcut name of model.")
     parser.add_argument(
@@ -33,35 +33,35 @@ def parse_args():
         "Default as `outputs`")
     parser.add_argument(
         "--max_seq_length",
-        default=128,
+        default=512,
         type=int,
         help="The maximum total input sequence length after tokenization. Sequences longer "
         "than this will be truncated, sequences shorter will be padded.")
     parser.add_argument(
         "--batch_size",
-        default=8,
+        default=32,
         type=int,
         help="Batch size per GPU/CPU for training.")
     parser.add_argument(
         "--learning_rate",
-        default=5e-5,
+        default=1e-4,
         type=float,
         help="The initial learning rate for Adam.")
     parser.add_argument(
         "--weight_decay",
-        default=0.0,
+        default=0.01,
         type=float,
         help="Weight decay if we apply some.")
     parser.add_argument(
         "--adam_epsilon",
-        default=1e-8,
+        default=1e-6,
         type=float,
         help="Epsilon for Adam optimizer.")
     parser.add_argument(
         "--max_grad_norm", default=1.0, type=float, help="Max gradient norm.")
     parser.add_argument(
         "--num_train_epochs",
-        default=3,
+        default=2,
         type=int,
         help="Total number of training epochs to perform.")
     parser.add_argument(
@@ -72,7 +72,7 @@ def parse_args():
     )
     parser.add_argument(
         "--warmup_proportion",
-        default=0.0,
+        default=0.1,
         type=float,
         help="Proportion of training steps to perform linear learning rate warmup for."
     )
@@ -131,5 +131,16 @@ def parse_args():
         "--do_train", action='store_true', help="Whether to train the model.")
     parser.add_argument(
         "--do_predict", action='store_true', help="Whether to predict.")
+    parser.add_argument(
+        "--scheduler_type",
+        default="linear",
+        type=str,
+        help="scheduler_type.",
+    )
+    parser.add_argument(
+        "--layer_lr_decay",
+        default=0.8,
+        type=float,
+        help="layer_lr_decay")
     args = parser.parse_args()
     return args

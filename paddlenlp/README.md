@@ -1,7 +1,9 @@
 # 使用PaddlePaddle复现论文：ConvBERT: Improving BERT with Span-based Dynamic Convolution
 
-## ConvBERT
+# install
+pip install -e .
 
+# ConvBERT
 [ConvBERT: Improving BERT with Span-based Dynamic Convolution](https://arxiv.org/abs/2008.02496)
 
 **摘要：**
@@ -15,44 +17,36 @@
 
 ## 快速开始
 
-### 环境安装
-
-~~~bash
-cd paddlenlp
-# 本地安装
-pip install -e .
-~~~
-
 ### 模型精度对齐
 运行`python compare.py`，对比huggingface与paddle之间的精度，我们可以发现精度的平均误差在10^-7量级，最大误差在10^-6量级。
 ```python
-python compare.py
-# huggingface YituTech/conv-bert-small vs paddle convbert-small
-# mean difference: tensor(4.6980e-07)
-# max difference: tensor(2.8610e-06)
-# huggingface YituTech/conv-bert-medium-small vs paddle convbert-medium-small
-# mean difference: tensor(3.4326e-07)
-# max difference: tensor(2.8014e-06)
-# huggingface YituTech/conv-bert-base vs paddle convbert-base
-# mean difference: tensor(4.5306e-07)
-# max difference: tensor(8.1062e-06)
+    python compare.py
+    # huggingface YituTech/conv-bert-small vs paddle convbert-small
+    # mean difference: tensor(4.6980e-07)
+    # max difference: tensor(2.8610e-06)
+    # huggingface YituTech/conv-bert-medium-small vs paddle convbert-medium-small
+    # mean difference: tensor(3.4326e-07)
+    # max difference: tensor(2.8014e-06)
+    # huggingface YituTech/conv-bert-base vs paddle convbert-base
+    # mean difference: tensor(4.5306e-07)
+    # max difference: tensor(8.1062e-06)
 ```
 
-### **数据准备**
+## **数据准备**
 
-Fine-tuning和预训练使用GLUE数据，这部分Paddle已提供，在执行运行命令时会自动下载。
+### Fine-tuning数据
+Fine-tuning 使用GLUE数据，这部分Paddle已提供，在执行Fine-tuning 命令时会自动下载并加载
 
-### **模型预训练**
+## **模型预训练**
 
-**特别注意**：预训练模型如果想要达到较好的效果，需要训练几乎全量的Book Corpus数据 和 Wikipedia Corpus数据，原始文本接近20G，建议用GPU进行预训练，最好4片GPU以上。如果资源较少，Paddle提供已经预训练好的模型进行Fine-tuning，可以直接跳转到下面：运行Fine-tuning-使用Paddle提供的预训练模型运行 Fine-tuning。
+**特别注意**：预训练模型如果想要达到较好的效果，需要训练几乎全量的Book Corpus数据 和 Wikipedia Corpus数据，原始文本接近20G，建议用GPU进行预训练，最好4片GPU以上。如果资源较少，Paddle提供已经预训练好的模型进行Fine-tuning，可以直接跳转到下面：运行Fine-tuning-使用Paddle提供的预训练模型运行 Fine-tuning
 
-单机单卡下进行训练：
-
+### 单机单卡
 ```shell
 export CUDA_VISIBLE_DEVICES="0"
 export DATA_DIR=./BookCorpus/
 
-python -u run_pretrain.py \
+python -u examples/language_model/convbert/run_pretrain.py \
     --model_type convbert \
     --model_name_or_path convbert-medium-small \
     --input_dir $DATA_DIR \
@@ -90,33 +84,29 @@ python -u run_pretrain.py \
 - `use_amp` 表示是否开启混合精度(float16)进行训练，默认不开启。如果在命令中加上了--use_amp，则会开启。
 - `init_from_ckpt` 表示是否从某个checkpoint继续训练（断点恢复训练），默认不开启。如果在命令中加上了--init_from_ckpt，且 --model_name_or_path 配置的是路径，则会开启从某个checkpoint继续训练。例如下面的命令从第40000步的checkpoint继续训练：
 
-### **Fine-tuning**
 
-#### QNLI
+## **Fine-tuning**
 
-使用Paddle提供的预训练模型运行QNLI数据集的Fine-tuning训练
+### 运行Fine-tuning
 
+#### **使用Paddle提供的预训练模型运行 Fine-tuning**
+
+以 GLUE/QNLI 任务为例，启动 Fine-tuning 的方式如下：
 ```shell
-unset CUDA_VISIBLE_DEVICES
-# 确保处在qnli文件夹
-cd qnli
-# 运行训练
-python -m paddle.distributed.launch --gpus "0" run_glue.py \
+export CUDA_VISIBLE_DEVICES=0
+export TASK_NAME=QNLI
+
+python -u examples/language_model/convbert/run_glue.py \
     --model_type convbert \
-    --model_name_or_path convbert-base \
-    --task_name QNLI \
+    --model_name_or_path convbert-small \
+    --task_name $TASK_NAME \
     --max_seq_length 128 \
-    --batch_size 32   \
+    --batch_size 256   \
     --learning_rate 1e-4 \
-    --scheduler_type cosine \ 
-    --layer_lr_decay 0.8 \
-    --weight_decay 0.01 \
-    --warmup_proportion 0.1 \
     --num_train_epochs 3 \
-    --logging_steps 10 \
+    --logging_steps 100 \
     --save_steps 100 \
-    --seed 42 \
-    --output_dir QNLI/ \
+    --output_dir ./glue/$TASK_NAME/ \
     --device gpu
 ```
 其中参数释义如下：
@@ -126,140 +116,113 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 - `max_seq_length` 表示最大句子长度，超过该长度将被截断。
 - `batch_size` 表示每次迭代**每张卡**上的样本数目。
 - `learning_rate` 表示基础学习率大小，将于learning rate scheduler产生的值相乘作为当前学习率。
-- `scheduler_type` scheduler类型，可选linear和cosine
-- `layer_lr_decay` 层学习率衰减，参考原TF代码。
 - `num_train_epochs` 表示训练轮数。
 - `logging_steps` 表示日志打印间隔。
 - `save_steps` 表示模型保存及评估间隔。
 - `output_dir` 表示模型保存路径。
 - `device` 表示使用的设备类型。默认为GPU，可以配置为CPU、GPU、XPU。若希望使用多GPU训练，将其设置为GPU，同时环境变量CUDA_VISIBLE_DEVICES配置要使用的GPU id。
 
-Fine-tuning后会有如下结果（详细训练可查看logs文件夹）：
+Fine-tuning过程将按照 `logging_steps` 和 `save_steps` 的设置打印如下格式的日志：
+
 ```
-dev acc  : 0.9320885960095185
-test acc : 0.933
+global step 100/792, epoch: 0, batch: 99, rank_id: 0, loss: 0.333723, lr: 0.0000970547, speed: 3.6162 step/s
+eval loss: 0.295912, acc: 0.8623853211009175, eval done total : 0.5295147895812988 s
+global step 200/792, epoch: 0, batch: 199, rank_id: 0, loss: 0.243273, lr: 0.0000830295, speed: 3.6822 step/s
+eval loss: 0.249330, acc: 0.8899082568807339, eval done total : 0.508596658706665 s
+global step 300/792, epoch: 1, batch: 35, rank_id: 0, loss: 0.166950, lr: 0.0000690042, speed: 3.7250 step/s
+eval loss: 0.307219, acc: 0.8956422018348624, eval done total : 0.5816614627838135 s
+global step 400/792, epoch: 1, batch: 135, rank_id: 0, loss: 0.185729, lr: 0.0000549790, speed: 3.6896 step/s
+eval loss: 0.201950, acc: 0.9025229357798165, eval done total : 0.5364704132080078 s
+global step 500/792, epoch: 1, batch: 235, rank_id: 0, loss: 0.132817, lr: 0.0000409537, speed: 3.7708 step/s
+eval loss: 0.239518, acc: 0.9094036697247706, eval done total : 0.5128316879272461 s
+global step 600/792, epoch: 2, batch: 71, rank_id: 0, loss: 0.163107, lr: 0.0000269285, speed: 3.7303 step/s
+eval loss: 0.199408, acc: 0.9139908256880734, eval done total : 0.5226929187774658 s
+global step 700/792, epoch: 2, batch: 171, rank_id: 0, loss: 0.082950, lr: 0.0000129032, speed: 3.7664 step/s
+eval loss: 0.236055, acc: 0.9025229357798165, eval done total : 0.5140993595123291 s
+global step 792/792, epoch: 2, batch: 263, rank_id: 0, loss: 0.025735, lr: 0.0000000000, speed: 4.1180 step/s
+eval loss: 0.226449, acc: 0.9013761467889908, eval done total : 0.5103530883789062 s
 ```
-##### 模型链接
 
-TODO(等待上传)
-
-##### 提交结果至GLUE
-
-<p align="center">
-    <img src="figure/QNLI.png" width="100%" />
-</p>
-
-```bash
-# 确保处在qnli文件夹
-cd qnli
-# 运行预测，请指定模型权重文件夹
-python qnli/predict.py \
-    --ckpt_path best-qnli_ft_model_6600.pdparams 
-   
-```
-运行完这个命令后，会将结果保存到template/QNLI.tsv之中，想要提交到GLUE的话，将这个template压缩成压缩包，然后提交。
-
-
-
-#### SQuAD v1.1
-
-使用Paddle提供的预训练模型运行SQuAD v1.1数据集的Fine-tuning
+对于 SQuAD v1.1,按如下方式启动 Fine-tuning:
 
 ```shell
 unset CUDA_VISIBLE_DEVICES
-# 确保处在squad1.1文件夹
-cd squad1.1
-# 开始训练
-python -m paddle.distributed.launch --gpus "0" run_squad.py \
+python -m paddle.distributed.launch --gpus "0" examples/language_model/convbert/squad/run_squad.py \
     --model_type convbert \
     --model_name_or_path convbert-base \
-    --max_seq_length 512 \
-    --batch_size 16 \
-    --learning_rate 1e-4 \
+    --max_seq_length 384 \
+    --batch_size 12 \
+    --learning_rate 3e-5 \
     --num_train_epochs 2 \
-    --scheduler_type linear \ 
-    --layer_lr_decay 0.8 \
-    --logging_steps 500 \
-    --save_steps 500 \
+    --logging_steps 1000 \
+    --save_steps 1000 \
     --warmup_proportion 0.1 \
     --weight_decay 0.01 \
-    --output_dir squad/ \
+    --output_dir ./tmp/squad/ \
     --device gpu \
     --do_train \
     --do_predict
-```
+ ```
 
-训练结束后模型会自动对结果进行评估，得到类似如下的输出：（详细训练可查看logs文件夹）
+* `model_type`: 预训练模型的种类。如bert，ernie，roberta等。
+* `model_name_or_path`: 预训练模型的具体名称。如bert-base-uncased，bert-large-cased等。或者是模型文件的本地路径。
+* `output_dir`: 保存模型checkpoint的路径。
+* `do_train`: 是否进行训练。
+* `do_predict`: 是否进行预测。
+
+训练结束后模型会自动对结果进行评估，得到类似如下的输出：
 
 ```text
-# gloabl step = 9500
 {
-  "exact": 84.46546830652791,
-  "f1": 90.9998989286406,
+  "exact": 81.18259224219489,
+  "f1": 88.68817481234801,
   "total": 10570,
-  "HasAns_exact": 84.46546830652791,
-  "HasAns_f1": 90.9998989286406,
+  "HasAns_exact": 81.18259224219489,
+  "HasAns_f1": 88.68817481234801,
   "HasAns_total": 10570
 }
 ```
 
-##### 模型链接
-
-TODO(等待上传)
-
-#### SQuAD v2.0
-
 对于 SQuAD v2.0,按如下方式启动 Fine-tuning:
 
-~~~shell
+```shell
 unset CUDA_VISIBLE_DEVICES
-# 确保处在squad2.0文件夹
-cd squad2.0
-# 开始训练
-python -m paddle.distributed.launch --gpus "0" run_squad.py \
-    --model_type convbert \
-    --model_name_or_path convbert-base \
-    --max_seq_length 512 \
-    --batch_size 16 \
-    --learning_rate 1e-4 \
+python -m paddle.distributed.launch --gpus "0" examples/language_model/convbert/squad/run_squad.py \
+    --model_type bert \
+    --model_name_or_path bert-base-uncased \
+    --max_seq_length 384 \
+    --batch_size 12 \
+    --learning_rate 3e-5 \
     --num_train_epochs 2 \
-    --scheduler_type linear \ 
-    --layer_lr_decay 0.8 \
-    --logging_steps 500 \
-    --save_steps 500 \
+    --logging_steps 1000 \
+    --save_steps 1000 \
     --warmup_proportion 0.1 \
     --weight_decay 0.01 \
-    --output_dir squad/ \
+    --output_dir ./tmp/squad/ \
     --device gpu \
     --do_train \
     --do_predict \
     --version_2_with_negative
-~~~
+ ```
 
 * `version_2_with_negative`: 使用squad2.0数据集和评价指标的标志。
 
-训练结束后会在模型会自动对结果进行评估，得到类似如下的输出：（详细训练可查看logs文件夹）
+训练结束后会在模型会自动对结果进行评估，得到类似如下的输出：
 
-~~~python
-# global step = 14000
+```text
 {
-  "exact": 80.94837025183189,
-  "f1": 83.96743280565248,
+  "exact": 73.25865408910974,
+  "f1": 76.63096554166046,
   "total": 11873,
-  "HasAns_exact": 74.67948717948718,
-  "HasAns_f1": 80.72627019256272,
+  "HasAns_exact": 73.22874493927125,
+  "HasAns_f1": 79.98303877802545,
   "HasAns_total": 5928,
-  "NoAns_exact": 87.19932716568545,
-  "NoAns_f1": 87.19932716568545,
+  "NoAns_exact": 73.28847771236333,
+  "NoAns_f1": 73.28847771236333,
   "NoAns_total": 5945,
-  "best_exact": 80.98206013644403,
-  "best_exact_thresh": -0.5712471008300781,
-  "best_f1": 83.96743280565195,
-  "best_f1_thresh": -0.0010485649108886719
+  "best_exact": 74.31988545439232,
+  "best_exact_thresh": -2.5820093154907227,
+  "best_f1": 77.20521797731851,
+  "best_f1_thresh": -1.559523582458496
 }
-~~~
-
-##### 模型链接
-
-TODO(等待上传)
-
+```

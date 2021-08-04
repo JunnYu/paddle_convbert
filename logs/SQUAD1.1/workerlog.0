@@ -1,0 +1,640 @@
+/usr/lib/python3/dist-packages/urllib3/util/selectors.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import namedtuple, Mapping
+/usr/lib/python3/dist-packages/urllib3/_collections.py:2: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, MutableMapping
+[32m[2021-08-04 15:22:04,980] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/vocab.txt[0m
+[32m[2021-08-04 15:22:04,996] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/model_state.pdparams[0m
+W0804 15:22:04.997256 11333 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 8.6, Driver API Version: 11.4, Runtime API Version: 11.2
+W0804 15:22:04.999354 11333 device_context.cc:422] device: 0, cuDNN Version: 8.1.
+[32m[2021-08-04 15:22:07,566] [    INFO][0m - Weights of ConvBertForQuestionAnswering not initialized from pretrained model: ['classifier.weight', 'classifier.bias'][0m
+global step 500, epoch: 1, batch: 500, loss: 1.595993, speed: 4.97 step/s
+Saving checkpoint to: squad/model_500
+Processing example: 1000
+time per 1000: 2.984757900238037
+Processing example: 2000
+time per 1000: 2.733107328414917
+Processing example: 3000
+time per 1000: 2.890270233154297
+Processing example: 4000
+time per 1000: 2.809413433074951
+Processing example: 5000
+time per 1000: 4.021404266357422
+Processing example: 6000
+time per 1000: 3.417649984359741
+Processing example: 7000
+time per 1000: 3.0931098461151123
+Processing example: 8000
+time per 1000: 3.0738861560821533
+Processing example: 9000
+time per 1000: 3.1213502883911133
+Processing example: 10000
+time per 1000: 2.808310031890869
+{
+  "exact": 65.36423841059603,
+  "f1": 75.8987950668065,
+  "total": 10570,
+  "HasAns_exact": 65.36423841059603,
+  "HasAns_f1": 75.8987950668065,
+  "HasAns_total": 10570
+}
+global step 1000, epoch: 1, batch: 1000, loss: 1.038924, speed: 3.45 step/s
+Saving checkpoint to: squad/model_1000
+Processing example: 1000
+time per 1000: 3.042341947555542
+Processing example: 2000
+time per 1000: 2.712534189224243
+Processing example: 3000
+time per 1000: 2.888137102127075
+Processing example: 4000
+time per 1000: 2.842468023300171
+Processing example: 5000
+time per 1000: 4.040098428726196
+Processing example: 6000
+time per 1000: 3.418868064880371
+Processing example: 7000
+time per 1000: 3.1124515533447266
+Processing example: 8000
+time per 1000: 3.0715014934539795
+Processing example: 9000
+time per 1000: 3.1266932487487793
+Processing example: 10000
+time per 1000: 2.803705930709839
+{
+  "exact": 74.66414380321665,
+  "f1": 83.51313377202094,
+  "total": 10570,
+  "HasAns_exact": 74.66414380321665,
+  "HasAns_f1": 83.51313377202094,
+  "HasAns_total": 10570
+}
+global step 1500, epoch: 1, batch: 1500, loss: 1.285607, speed: 3.45 step/s
+Saving checkpoint to: squad/model_1500
+Processing example: 1000
+time per 1000: 3.01704478263855
+Processing example: 2000
+time per 1000: 2.726543664932251
+Processing example: 3000
+time per 1000: 2.9018633365631104
+Processing example: 4000
+time per 1000: 2.81913161277771
+Processing example: 5000
+time per 1000: 4.029809951782227
+Processing example: 6000
+time per 1000: 3.4205501079559326
+Processing example: 7000
+time per 1000: 3.1024067401885986
+Processing example: 8000
+time per 1000: 3.0783286094665527
+Processing example: 9000
+time per 1000: 3.136795997619629
+Processing example: 10000
+time per 1000: 2.8055362701416016
+{
+  "exact": 78.23084200567644,
+  "f1": 86.20095670881592,
+  "total": 10570,
+  "HasAns_exact": 78.23084200567644,
+  "HasAns_f1": 86.20095670881592,
+  "HasAns_total": 10570
+}
+global step 2000, epoch: 1, batch: 2000, loss: 0.983262, speed: 3.48 step/s
+Saving checkpoint to: squad/model_2000
+Processing example: 1000
+time per 1000: 3.0223283767700195
+Processing example: 2000
+time per 1000: 2.719776153564453
+Processing example: 3000
+time per 1000: 2.8952648639678955
+Processing example: 4000
+time per 1000: 2.834853410720825
+Processing example: 5000
+time per 1000: 4.03124213218689
+Processing example: 6000
+time per 1000: 3.4192497730255127
+Processing example: 7000
+time per 1000: 3.105858564376831
+Processing example: 8000
+time per 1000: 3.0750510692596436
+Processing example: 9000
+time per 1000: 3.1259944438934326
+Processing example: 10000
+time per 1000: 2.8042402267456055
+{
+  "exact": 79.52696310312204,
+  "f1": 87.36064274360423,
+  "total": 10570,
+  "HasAns_exact": 79.52696310312204,
+  "HasAns_f1": 87.36064274360423,
+  "HasAns_total": 10570
+}
+global step 2500, epoch: 1, batch: 2500, loss: 0.625278, speed: 3.47 step/s
+Saving checkpoint to: squad/model_2500
+Processing example: 1000
+time per 1000: 3.015779733657837
+Processing example: 2000
+time per 1000: 2.7190866470336914
+Processing example: 3000
+time per 1000: 2.8900792598724365
+Processing example: 4000
+time per 1000: 2.8154053688049316
+Processing example: 5000
+time per 1000: 4.0262062549591064
+Processing example: 6000
+time per 1000: 3.404680013656616
+Processing example: 7000
+time per 1000: 3.082904100418091
+Processing example: 8000
+time per 1000: 3.0594823360443115
+Processing example: 9000
+time per 1000: 3.1272618770599365
+Processing example: 10000
+time per 1000: 2.8023319244384766
+{
+  "exact": 80.52980132450331,
+  "f1": 88.21919170943842,
+  "total": 10570,
+  "HasAns_exact": 80.52980132450331,
+  "HasAns_f1": 88.21919170943842,
+  "HasAns_total": 10570
+}
+global step 3000, epoch: 1, batch: 3000, loss: 0.475325, speed: 3.46 step/s
+Saving checkpoint to: squad/model_3000
+Processing example: 1000
+time per 1000: 3.0158112049102783
+Processing example: 2000
+time per 1000: 2.745903491973877
+Processing example: 3000
+time per 1000: 2.901294469833374
+Processing example: 4000
+time per 1000: 2.8149235248565674
+Processing example: 5000
+time per 1000: 4.018369913101196
+Processing example: 6000
+time per 1000: 3.4077494144439697
+Processing example: 7000
+time per 1000: 3.0866036415100098
+Processing example: 8000
+time per 1000: 3.06048583984375
+Processing example: 9000
+time per 1000: 3.133582830429077
+Processing example: 10000
+time per 1000: 2.791884183883667
+{
+  "exact": 79.89593188268685,
+  "f1": 88.23879752315598,
+  "total": 10570,
+  "HasAns_exact": 79.89593188268685,
+  "HasAns_f1": 88.23879752315598,
+  "HasAns_total": 10570
+}
+global step 3500, epoch: 1, batch: 3500, loss: 0.787866, speed: 3.43 step/s
+Saving checkpoint to: squad/model_3500
+Processing example: 1000
+time per 1000: 3.05594801902771
+Processing example: 2000
+time per 1000: 2.706212282180786
+Processing example: 3000
+time per 1000: 2.9044179916381836
+Processing example: 4000
+time per 1000: 2.81587290763855
+Processing example: 5000
+time per 1000: 4.01770544052124
+Processing example: 6000
+time per 1000: 3.4144697189331055
+Processing example: 7000
+time per 1000: 3.098907709121704
+Processing example: 8000
+time per 1000: 3.0671463012695312
+Processing example: 9000
+time per 1000: 3.1245317459106445
+Processing example: 10000
+time per 1000: 2.80787992477417
+{
+  "exact": 81.83538315988648,
+  "f1": 89.1539370590674,
+  "total": 10570,
+  "HasAns_exact": 81.83538315988648,
+  "HasAns_f1": 89.1539370590674,
+  "HasAns_total": 10570
+}
+global step 4000, epoch: 1, batch: 4000, loss: 1.366742, speed: 3.48 step/s
+Saving checkpoint to: squad/model_4000
+Processing example: 1000
+time per 1000: 3.031987428665161
+Processing example: 2000
+time per 1000: 2.7298712730407715
+Processing example: 3000
+time per 1000: 2.8913793563842773
+Processing example: 4000
+time per 1000: 2.799731969833374
+Processing example: 5000
+time per 1000: 4.02114200592041
+Processing example: 6000
+time per 1000: 3.4041309356689453
+Processing example: 7000
+time per 1000: 3.1034395694732666
+Processing example: 8000
+time per 1000: 3.0690789222717285
+Processing example: 9000
+time per 1000: 3.1246907711029053
+Processing example: 10000
+time per 1000: 2.8117430210113525
+{
+  "exact": 82.40302743614002,
+  "f1": 89.70085712754437,
+  "total": 10570,
+  "HasAns_exact": 82.40302743614002,
+  "HasAns_f1": 89.70085712754437,
+  "HasAns_total": 10570
+}
+global step 4500, epoch: 1, batch: 4500, loss: 0.498020, speed: 3.45 step/s
+Saving checkpoint to: squad/model_4500
+Processing example: 1000
+time per 1000: 3.074263334274292
+Processing example: 2000
+time per 1000: 2.723010301589966
+Processing example: 3000
+time per 1000: 2.889983654022217
+Processing example: 4000
+time per 1000: 2.801820993423462
+Processing example: 5000
+time per 1000: 4.007138013839722
+Processing example: 6000
+time per 1000: 3.4079692363739014
+Processing example: 7000
+time per 1000: 3.1129701137542725
+Processing example: 8000
+time per 1000: 3.0718963146209717
+Processing example: 9000
+time per 1000: 3.116072177886963
+Processing example: 10000
+time per 1000: 2.798799753189087
+{
+  "exact": 82.639545884579,
+  "f1": 89.70383748967812,
+  "total": 10570,
+  "HasAns_exact": 82.639545884579,
+  "HasAns_f1": 89.70383748967812,
+  "HasAns_total": 10570
+}
+global step 5000, epoch: 1, batch: 5000, loss: 0.704374, speed: 3.47 step/s
+Saving checkpoint to: squad/model_5000
+Processing example: 1000
+time per 1000: 3.05846905708313
+Processing example: 2000
+time per 1000: 2.722337007522583
+Processing example: 3000
+time per 1000: 2.8929803371429443
+Processing example: 4000
+time per 1000: 2.810610771179199
+Processing example: 5000
+time per 1000: 4.016807794570923
+Processing example: 6000
+time per 1000: 3.3981246948242188
+Processing example: 7000
+time per 1000: 3.092829942703247
+Processing example: 8000
+time per 1000: 3.064547061920166
+Processing example: 9000
+time per 1000: 3.1279497146606445
+Processing example: 10000
+time per 1000: 2.8042783737182617
+{
+  "exact": 83.45316934720908,
+  "f1": 90.26199380814975,
+  "total": 10570,
+  "HasAns_exact": 83.45316934720908,
+  "HasAns_f1": 90.26199380814975,
+  "HasAns_total": 10570
+}
+global step 5500, epoch: 2, batch: 16, loss: 0.545147, speed: 3.46 step/s
+Saving checkpoint to: squad/model_5500
+Processing example: 1000
+time per 1000: 3.1076548099517822
+Processing example: 2000
+time per 1000: 2.709207057952881
+Processing example: 3000
+time per 1000: 2.8858864307403564
+Processing example: 4000
+time per 1000: 2.8122897148132324
+Processing example: 5000
+time per 1000: 4.016754150390625
+Processing example: 6000
+time per 1000: 3.3995814323425293
+Processing example: 7000
+time per 1000: 3.088151216506958
+Processing example: 8000
+time per 1000: 3.0614635944366455
+Processing example: 9000
+time per 1000: 3.1330175399780273
+Processing example: 10000
+time per 1000: 2.8123974800109863
+{
+  "exact": 83.68968779564806,
+  "f1": 90.41495780305453,
+  "total": 10570,
+  "HasAns_exact": 83.68968779564806,
+  "HasAns_f1": 90.41495780305453,
+  "HasAns_total": 10570
+}
+global step 6000, epoch: 2, batch: 516, loss: 0.486866, speed: 3.50 step/s
+Saving checkpoint to: squad/model_6000
+Processing example: 1000
+time per 1000: 3.1026127338409424
+Processing example: 2000
+time per 1000: 2.7096550464630127
+Processing example: 3000
+time per 1000: 2.8880176544189453
+Processing example: 4000
+time per 1000: 2.8231422901153564
+Processing example: 5000
+time per 1000: 4.031045198440552
+Processing example: 6000
+time per 1000: 3.4116315841674805
+Processing example: 7000
+time per 1000: 3.09809947013855
+Processing example: 8000
+time per 1000: 3.074030637741089
+Processing example: 9000
+time per 1000: 3.1182167530059814
+Processing example: 10000
+time per 1000: 2.798600196838379
+{
+  "exact": 82.95175023651845,
+  "f1": 90.03793201498719,
+  "total": 10570,
+  "HasAns_exact": 82.95175023651845,
+  "HasAns_f1": 90.03793201498719,
+  "HasAns_total": 10570
+}
+global step 6500, epoch: 2, batch: 1016, loss: 0.594620, speed: 3.47 step/s
+Saving checkpoint to: squad/model_6500
+Processing example: 1000
+time per 1000: 3.0741465091705322
+Processing example: 2000
+time per 1000: 2.7137186527252197
+Processing example: 3000
+time per 1000: 2.901482343673706
+Processing example: 4000
+time per 1000: 2.817875623703003
+Processing example: 5000
+time per 1000: 4.027652263641357
+Processing example: 6000
+time per 1000: 3.4132938385009766
+Processing example: 7000
+time per 1000: 3.0777955055236816
+Processing example: 8000
+time per 1000: 3.0568766593933105
+Processing example: 9000
+time per 1000: 3.111595392227173
+Processing example: 10000
+time per 1000: 2.7898781299591064
+{
+  "exact": 83.2639545884579,
+  "f1": 90.61017867503949,
+  "total": 10570,
+  "HasAns_exact": 83.2639545884579,
+  "HasAns_f1": 90.61017867503949,
+  "HasAns_total": 10570
+}
+global step 7000, epoch: 2, batch: 1516, loss: 0.919374, speed: 3.45 step/s
+Saving checkpoint to: squad/model_7000
+Processing example: 1000
+time per 1000: 3.081418037414551
+Processing example: 2000
+time per 1000: 2.7108232975006104
+Processing example: 3000
+time per 1000: 2.906134843826294
+Processing example: 4000
+time per 1000: 2.837273359298706
+Processing example: 5000
+time per 1000: 4.031105041503906
+Processing example: 6000
+time per 1000: 3.425689458847046
+Processing example: 7000
+time per 1000: 3.105389356613159
+Processing example: 8000
+time per 1000: 3.074535608291626
+Processing example: 9000
+time per 1000: 3.123459815979004
+Processing example: 10000
+time per 1000: 2.8000152111053467
+{
+  "exact": 83.37748344370861,
+  "f1": 90.49147256982793,
+  "total": 10570,
+  "HasAns_exact": 83.37748344370861,
+  "HasAns_f1": 90.49147256982793,
+  "HasAns_total": 10570
+}
+global step 7500, epoch: 2, batch: 2016, loss: 0.660149, speed: 3.46 step/s
+Saving checkpoint to: squad/model_7500
+Processing example: 1000
+time per 1000: 3.072340488433838
+Processing example: 2000
+time per 1000: 2.7136929035186768
+Processing example: 3000
+time per 1000: 2.9063994884490967
+Processing example: 4000
+time per 1000: 2.8227436542510986
+Processing example: 5000
+time per 1000: 4.023001194000244
+Processing example: 6000
+time per 1000: 3.406442880630493
+Processing example: 7000
+time per 1000: 3.09017014503479
+Processing example: 8000
+time per 1000: 3.0703792572021484
+Processing example: 9000
+time per 1000: 3.1256356239318848
+Processing example: 10000
+time per 1000: 2.8039395809173584
+{
+  "exact": 83.68968779564806,
+  "f1": 90.57013482702347,
+  "total": 10570,
+  "HasAns_exact": 83.68968779564806,
+  "HasAns_f1": 90.57013482702347,
+  "HasAns_total": 10570
+}
+global step 8000, epoch: 2, batch: 2516, loss: 0.480941, speed: 3.45 step/s
+Saving checkpoint to: squad/model_8000
+Processing example: 1000
+time per 1000: 3.106471300125122
+Processing example: 2000
+time per 1000: 2.744032144546509
+Processing example: 3000
+time per 1000: 2.9046123027801514
+Processing example: 4000
+time per 1000: 2.830442428588867
+Processing example: 5000
+time per 1000: 4.039659261703491
+Processing example: 6000
+time per 1000: 3.4008336067199707
+Processing example: 7000
+time per 1000: 3.0920767784118652
+Processing example: 8000
+time per 1000: 3.053748369216919
+Processing example: 9000
+time per 1000: 3.117558717727661
+Processing example: 10000
+time per 1000: 2.8343911170959473
+{
+  "exact": 84.20056764427625,
+  "f1": 90.75769415367948,
+  "total": 10570,
+  "HasAns_exact": 84.20056764427625,
+  "HasAns_f1": 90.75769415367948,
+  "HasAns_total": 10570
+}
+global step 8500, epoch: 2, batch: 3016, loss: 0.663233, speed: 3.46 step/s
+Saving checkpoint to: squad/model_8500
+Processing example: 1000
+time per 1000: 3.0741660594940186
+Processing example: 2000
+time per 1000: 2.7348971366882324
+Processing example: 3000
+time per 1000: 2.900179624557495
+Processing example: 4000
+time per 1000: 2.809913396835327
+Processing example: 5000
+time per 1000: 4.011347770690918
+Processing example: 6000
+time per 1000: 3.397491931915283
+Processing example: 7000
+time per 1000: 3.087815999984741
+Processing example: 8000
+time per 1000: 3.059988498687744
+Processing example: 9000
+time per 1000: 3.119779586791992
+Processing example: 10000
+time per 1000: 2.808767318725586
+{
+  "exact": 84.0964995269631,
+  "f1": 90.9737185987172,
+  "total": 10570,
+  "HasAns_exact": 84.0964995269631,
+  "HasAns_f1": 90.9737185987172,
+  "HasAns_total": 10570
+}
+global step 9000, epoch: 2, batch: 3516, loss: 1.012929, speed: 3.44 step/s
+Saving checkpoint to: squad/model_9000
+Processing example: 1000
+time per 1000: 3.0792155265808105
+Processing example: 2000
+time per 1000: 2.7293667793273926
+Processing example: 3000
+time per 1000: 2.8956499099731445
+Processing example: 4000
+time per 1000: 2.8218233585357666
+Processing example: 5000
+time per 1000: 4.028479814529419
+Processing example: 6000
+time per 1000: 3.414008378982544
+Processing example: 7000
+time per 1000: 3.091895341873169
+Processing example: 8000
+time per 1000: 3.0587689876556396
+Processing example: 9000
+time per 1000: 3.112795352935791
+Processing example: 10000
+time per 1000: 2.795015335083008
+{
+  "exact": 83.84105960264901,
+  "f1": 90.81706975178056,
+  "total": 10570,
+  "HasAns_exact": 83.84105960264901,
+  "HasAns_f1": 90.81706975178056,
+  "HasAns_total": 10570
+}
+global step 9500, epoch: 2, batch: 4016, loss: 0.903970, speed: 3.46 step/s
+Saving checkpoint to: squad/model_9500
+Processing example: 1000
+time per 1000: 3.0561931133270264
+Processing example: 2000
+time per 1000: 2.722177505493164
+Processing example: 3000
+time per 1000: 2.8869500160217285
+Processing example: 4000
+time per 1000: 2.8319625854492188
+Processing example: 5000
+time per 1000: 4.028851747512817
+Processing example: 6000
+time per 1000: 3.406369686126709
+Processing example: 7000
+time per 1000: 3.0895214080810547
+Processing example: 8000
+time per 1000: 3.061284303665161
+Processing example: 9000
+time per 1000: 3.117919683456421
+Processing example: 10000
+time per 1000: 2.8007988929748535
+{
+  "exact": 84.46546830652791,
+  "f1": 90.9998989286406,
+  "total": 10570,
+  "HasAns_exact": 84.46546830652791,
+  "HasAns_f1": 90.9998989286406,
+  "HasAns_total": 10570
+}
+global step 10000, epoch: 2, batch: 4516, loss: 0.529017, speed: 3.49 step/s
+Saving checkpoint to: squad/model_10000
+Processing example: 1000
+time per 1000: 3.0890443325042725
+Processing example: 2000
+time per 1000: 2.7188031673431396
+Processing example: 3000
+time per 1000: 2.895517587661743
+Processing example: 4000
+time per 1000: 2.814969062805176
+Processing example: 5000
+time per 1000: 4.015707015991211
+Processing example: 6000
+time per 1000: 3.406146287918091
+Processing example: 7000
+time per 1000: 3.0945889949798584
+Processing example: 8000
+time per 1000: 3.0705087184906006
+Processing example: 9000
+time per 1000: 3.1221113204956055
+Processing example: 10000
+time per 1000: 2.8288447856903076
+{
+  "exact": 84.24787133396404,
+  "f1": 91.10828987209594,
+  "total": 10570,
+  "HasAns_exact": 84.24787133396404,
+  "HasAns_f1": 91.10828987209594,
+  "HasAns_total": 10570
+}
+global step 10500, epoch: 2, batch: 5016, loss: 0.662816, speed: 3.47 step/s
+Saving checkpoint to: squad/model_10500
+Processing example: 1000
+time per 1000: 3.0751142501831055
+Processing example: 2000
+time per 1000: 2.7160463333129883
+Processing example: 3000
+time per 1000: 2.883349657058716
+Processing example: 4000
+time per 1000: 2.812865972518921
+Processing example: 5000
+time per 1000: 4.023794412612915
+Processing example: 6000
+time per 1000: 3.4110465049743652
+Processing example: 7000
+time per 1000: 3.092163324356079
+Processing example: 8000
+time per 1000: 3.0604729652404785
+Processing example: 9000
+time per 1000: 3.1251447200775146
+Processing example: 10000
+time per 1000: 2.81640887260437
+{
+  "exact": 84.27625354777673,
+  "f1": 91.13939016493998,
+  "total": 10570,
+  "HasAns_exact": 84.27625354777673,
+  "HasAns_f1": 91.13939016493998,
+  "HasAns_total": 10570
+}
+Saving checkpoint to: squad/model_10968

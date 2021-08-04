@@ -30,7 +30,7 @@ from paddlenlp.transformers import BertForSequenceClassification, BertTokenizer
 from paddlenlp.transformers import ElectraForSequenceClassification, ElectraTokenizer
 from paddlenlp.transformers import ErnieForSequenceClassification, ErnieTokenizer
 from paddlenlp.transformers import ConvBertForSequenceClassification, ConvBertTokenizer
-from paddlenlp.transformers import LinearDecayWithWarmup
+from paddlenlp.transformers import LinearDecayWithWarmup,CosineDecayWithWarmup
 from paddlenlp.metrics import AccuracyAndF1, Mcc, PearsonAndSpearman
 
 FORMAT = '%(asctime)s-%(levelname)s: %(message)s'
@@ -93,6 +93,12 @@ def parse_args():
         help="The output directory where the model predictions and checkpoints will be written.",
     )
     parser.add_argument(
+        "--scheduler_type",
+        default="linear",
+        type=str,
+        help="scheduler_type.",
+    )
+    parser.add_argument(
         "--max_seq_length",
         default=128,
         type=int,
@@ -103,6 +109,11 @@ def parse_args():
         default=1e-4,
         type=float,
         help="The initial learning rate for Adam.")
+    parser.add_argument(
+        "--layer_lr_decay",
+        default=0.8,
+        type=float,
+        help="layer_lr_decay")
     parser.add_argument(
         "--num_train_epochs",
         default=3,
@@ -125,7 +136,7 @@ def parse_args():
         help="Batch size per GPU/CPU for training.", )
     parser.add_argument(
         "--weight_decay",
-        default=0.0,
+        default=0.01,
         type=float,
         help="Weight decay if we apply some.")
     parser.add_argument(
@@ -301,16 +312,6 @@ def do_train(args):
             num_workers=2,
             return_list=True)
 
-        test_ds = load_dataset('glue', args.task_name, splits='test')
-        test_ds = test_ds.map(trans_func, lazy=True)
-        test_batch_sampler = paddle.io.BatchSampler(
-            test_ds, batch_size=args.batch_size*2, shuffle=False)
-        test_data_loader = DataLoader(
-            dataset=test_ds,
-            batch_sampler=test_batch_sampler,
-            collate_fn=batchify_fn,
-            num_workers=2,
-            return_list=True)
 
     num_classes = 1 if train_ds.label_list == None else len(train_ds.label_list)
     model = model_class.from_pretrained(
@@ -318,19 +319,47 @@ def do_train(args):
     if paddle.distributed.get_world_size() > 1:
         model = paddle.DataParallel(model)
 
+    # layer_lr for base
+    ############################################################
+    n_layers = 12
+    depth_to_slice = {}
+    start = 0
+    for i in range(13):
+        if i == 0:
+            zengliang = 5
+        if i == 1:
+            zengliang = 23
+        depth_to_slice[i] = (start,start+zengliang)
+        start += zengliang
+    depth_to_slice[14] = (start,-1)
+
+    for depth, slice in depth_to_slice.items():
+        layer_lr = args.layer_lr_decay ** (n_layers + 2 - depth)
+        if slice[1]==-1:
+            for p in model.parameters()[slice[0]:]:
+                p.optimize_attr["learning_rate"] *= layer_lr
+        else:           
+            for p in model.parameters()[slice[0]:slice[1]]:
+                p.optimize_attr["learning_rate"] *= layer_lr
+    ############################################################
+
     num_training_steps = args.max_steps if args.max_steps > 0 else (
         len(train_data_loader) * args.num_train_epochs)
     warmup = args.warmup_steps if args.warmup_steps > 0 else args.warmup_proportion
 
-    lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps,
-                                         warmup)
-
+    if args.scheduler_type == "linear":
+        lr_scheduler = LinearDecayWithWarmup(args.learning_rate, num_training_steps,
+                                            warmup)
+    elif args.scheduler_type == "cosine":
+        lr_scheduler = CosineDecayWithWarmup(args.learning_rate, num_training_steps,
+                                            warmup)     
     # Generate parameter names needed to perform weight decay.
     # All bias and LayerNorm parameters are excluded.
     decay_params = [
         p.name for n, p in model.named_parameters()
         if not any(nd in n for nd in ["bias", "norm"])
     ]
+
     optimizer = paddle.optimizer.AdamW(
         learning_rate=lr_scheduler,
         beta1=0.9,
@@ -347,6 +376,7 @@ def do_train(args):
 
     global_step = 0
     tic_train = time.time()
+
     for epoch in range(args.num_train_epochs):
         for step, batch in enumerate(train_data_loader):
             global_step += 1
@@ -373,10 +403,7 @@ def do_train(args):
                              dev_data_loader_mismatched)
                     print("eval done total : %s s" % (time.time() - tic_eval))
                 else:
-                    print("============Dev Dataset============")
                     evaluate(model, loss_fct, metric, dev_data_loader)
-                    print("============Test Dataset============")
-                    evaluate(model, loss_fct, metric, test_data_loader)
                     print("eval done total : %s s" % (time.time() - tic_eval))
                 if paddle.distributed.get_rank() == 0:
                     output_dir = os.path.join(args.output_dir,
