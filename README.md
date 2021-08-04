@@ -11,6 +11,14 @@
 我们为 BERT 配备了这种混合注意力设计并构建了一个ConvBERT模型。实验表明，ConvBERT 在各种下游任务中明显优于BERT及其变体，具有更低的训练成本和更少的模型参数。
 值得注意的是，ConvBERT-base 模型达到86.4GLUE分数，比ELECTRA-base高0.7，同时使用不到1/4的训练成本。
 
+## 原论文效果
+<p align="center">
+    <img src="figure/qnli.jpg" width="100%" />
+</p>
+<p align="center">
+    <img src="figure/squad.jpg" width="100%" />
+</p>
+
 本项目是 ConvBert 在 Paddle 2.x上的开源实现。
 
 ## 快速开始
@@ -18,10 +26,13 @@
 ### 环境安装
 
 ~~~bash
+# 进入paddlenlp目录
 cd paddlenlp
 # 本地安装
 pip install -r requirements.txt
 pip install -e .
+# 返回初始目录
+cd ..
 ~~~
 
 ### 模型精度对齐
