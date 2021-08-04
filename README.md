@@ -162,9 +162,10 @@ test acc : 0.933
 ```
 ##### 模型链接
 
-TODO(等待上传)
+链接：https://pan.baidu.com/s/1mtYxl8a7ExK7vENpSrb4Kg 
+提取码：f9uy
 
-##### 提交结果至GLUE
+##### 提交结果至GLUE（其他GLUE任务没有使用ConvBERT跑，只跑了QNLI）
 
 <p align="center">
     <img src="figure/QNLI.png" width="100%" />
@@ -227,7 +228,8 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 
 ##### 模型链接
 
-TODO(等待上传)
+链接：https://pan.baidu.com/s/1TJnc976TM694TEs9HgF66w 
+提取码：bt5m
 
 #### SQuAD v2.0
 
@@ -284,7 +286,8 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 
 ##### 模型链接
 
-TODO(等待上传)
+链接：https://pan.baidu.com/s/14HW5m2za1Cqtw4gAFXo7nw 
+提取码：2bcm
 
 
 # Reference
