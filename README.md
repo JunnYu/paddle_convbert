@@ -25,6 +25,14 @@
 
 ### 环境安装
 
+```bash
+python：     3.8
+GPU:         RTX3090
+框架：       PaddlePaddle2.1
+cuda：       11.2
+cudnn：      8.1.1.33-1
+```
+
 ~~~bash
 # 进入paddlenlp目录
 cd paddlenlp
