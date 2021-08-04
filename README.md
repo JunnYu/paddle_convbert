@@ -198,7 +198,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
     --batch_size 16 \
     --learning_rate 1e-4 \
     --num_train_epochs 2 \
-    --scheduler_type linear \ 
+    --scheduler_type linear \
     --layer_lr_decay 0.8 \
     --logging_steps 500 \
     --save_steps 500 \
@@ -245,7 +245,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
     --batch_size 16 \
     --learning_rate 1e-4 \
     --num_train_epochs 2 \
-    --scheduler_type linear \ 
+    --scheduler_type linear \
     --layer_lr_decay 0.8 \
     --logging_steps 500 \
     --save_steps 500 \
