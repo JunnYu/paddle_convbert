@@ -146,8 +146,9 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 - `output_dir` 表示模型保存路径。
 - `device` 表示使用的设备类型。默认为GPU，可以配置为CPU、GPU、XPU。若希望使用多GPU训练，将其设置为GPU，同时环境变量CUDA_VISIBLE_DEVICES配置要使用的GPU id。
 
-Fine-tuning后会有如下结果（详细训练可查看logs文件夹）：
-```
+训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）：
+
+```python
 dev acc  : 0.9320885960095185
 test acc : 0.933
 ```
@@ -198,12 +199,13 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
     --output_dir squad/ \
     --device gpu \
     --do_train \
+    --seed 42 \
     --do_predict
 ```
 
-训练结束后模型会自动对结果进行评估，得到类似如下的输出：（详细训练可查看logs文件夹）
+训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）
 
-```text
+```python
 # gloabl step = 9500
 {
   "exact": 84.46546830652791,
@@ -245,12 +247,13 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
     --device gpu \
     --do_train \
     --do_predict \
+    --seed 42 \
     --version_2_with_negative
 ~~~
 
 * `version_2_with_negative`: 使用squad2.0数据集和评价指标的标志。
 
-训练结束后会在模型会自动对结果进行评估，得到类似如下的输出：（详细训练可查看logs文件夹）
+训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）
 
 ~~~python
 # global step = 14000
@@ -275,3 +278,28 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 
 TODO(等待上传)
 
+
+# Reference
+
+```bibtex
+@article{Jiang2020ConvBERT,
+  title={ConvBERT: Improving BERT with Span-based Dynamic Convolution},
+  author={Zi-Hang Jiang and Weihao Yu and Daquan Zhou and Y. Chen and Jiashi Feng and S. Yan},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2008.02496}
+}
+```
+```bibtex
+@inproceedings{wolf-etal-2020-transformers,
+    title = "Transformers: State-of-the-Art Natural Language Processing",
+    author = "Thomas Wolf and Lysandre Debut and Victor Sanh and Julien Chaumond and Clement Delangue and Anthony Moi and Pierric Cistac and Tim Rault and Rémi Louf and Morgan Funtowicz and Joe Davison and Sam Shleifer and Patrick von Platen and Clara Ma and Yacine Jernite and Julien Plu and Canwen Xu and Teven Le Scao and Sylvain Gugger and Mariama Drame and Quentin Lhoest and Alexander M. Rush",
+    booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+    month = oct,
+    year = "2020",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2020.emnlp-demos.6",
+    pages = "38--45"
+}
+```
