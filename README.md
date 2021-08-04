@@ -174,7 +174,7 @@ TODO(等待上传)
 # 确保处在qnli文件夹
 cd qnli
 # 运行预测，请指定模型权重文件夹
-python qnli/predict.py \
+python qnli_predict.py \
     --ckpt_path best-qnli_ft_model_6600.pdparams 
    
 ```
