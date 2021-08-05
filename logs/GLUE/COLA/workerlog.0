@@ -1,0 +1,117 @@
+/usr/lib/python3/dist-packages/urllib3/util/selectors.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import namedtuple, Mapping
+/usr/lib/python3/dist-packages/urllib3/_collections.py:2: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, MutableMapping
+-----------  Configuration Arguments -----------
+adam_epsilon: 1e-06
+batch_size: 32
+device: gpu
+layer_lr_decay: 0.8
+learning_rate: 0.0001
+logging_steps: 40
+max_seq_length: 128
+max_steps: -1
+model_name_or_path: convbert-base
+model_type: convbert
+num_train_epochs: 3
+output_dir: cola
+save_steps: 40
+scheduler_type: linear
+seed: 6666
+task_name: cola
+warmup_proportion: 0.1
+warmup_steps: 0
+weight_decay: 0.01
+------------------------------------------------
+2021-08-05 13:34:47,584-INFO: unique_endpoints {'127.0.0.1:39409'}
+[32m[2021-08-05 13:34:47,599] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/vocab.txt[0m
+2021-08-05 13:34:47,615-INFO: unique_endpoints {'127.0.0.1:39409'}
+[32m[2021-08-05 13:34:47,617] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/model_state.pdparams[0m
+W0805 13:34:47.618736  1564 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 8.6, Driver API Version: 11.4, Runtime API Version: 11.2
+W0805 13:34:47.620838  1564 device_context.cc:422] device: 0, cuDNN Version: 8.1.
+[32m[2021-08-05 13:34:50,144] [    INFO][0m - Weights of ConvBertForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias'][0m
+num_training_steps 804
+global step 40/804, epoch: 0, batch: 39, rank_id: 0, loss: 0.485868, lr: 0.0000500000, speed: 6.0872 step/s
+====================================================================================================
+eval loss: 0.465580, mcc: 0.2919790524372276, 
+eval done total : 0.7643465995788574 s
+global step 80/804, epoch: 0, batch: 79, rank_id: 0, loss: 0.386066, lr: 0.0001000000, speed: 4.2918 step/s
+====================================================================================================
+eval loss: 0.367693, mcc: 0.6072497164582199, 
+eval done total : 0.7667765617370605 s
+global step 120/804, epoch: 0, batch: 119, rank_id: 0, loss: 0.318688, lr: 0.0000944751, speed: 4.3222 step/s
+====================================================================================================
+eval loss: 0.423430, mcc: 0.5984081258428807, 
+eval done total : 0.7868731021881104 s
+global step 160/804, epoch: 0, batch: 159, rank_id: 0, loss: 0.209110, lr: 0.0000889503, speed: 4.3238 step/s
+====================================================================================================
+eval loss: 0.406272, mcc: 0.610638611987945, 
+eval done total : 0.770003080368042 s
+global step 200/804, epoch: 0, batch: 199, rank_id: 0, loss: 0.363695, lr: 0.0000834254, speed: 4.1987 step/s
+====================================================================================================
+eval loss: 0.396781, mcc: 0.6284381497799617, 
+eval done total : 0.8110454082489014 s
+global step 240/804, epoch: 0, batch: 239, rank_id: 0, loss: 0.313228, lr: 0.0000779006, speed: 4.2844 step/s
+====================================================================================================
+eval loss: 0.340649, mcc: 0.6452466812383768, 
+eval done total : 0.8016612529754639 s
+global step 280/804, epoch: 1, batch: 11, rank_id: 0, loss: 0.424610, lr: 0.0000723757, speed: 4.3425 step/s
+====================================================================================================
+eval loss: 0.392079, mcc: 0.6639332131389398, 
+eval done total : 0.7737717628479004 s
+global step 320/804, epoch: 1, batch: 51, rank_id: 0, loss: 0.170760, lr: 0.0000668508, speed: 4.2981 step/s
+====================================================================================================
+eval loss: 0.364292, mcc: 0.6700581427335397, 
+eval done total : 0.8553626537322998 s
+global step 360/804, epoch: 1, batch: 91, rank_id: 0, loss: 0.262329, lr: 0.0000613260, speed: 4.2839 step/s
+====================================================================================================
+eval loss: 0.419755, mcc: 0.6783431188600977, 
+eval done total : 0.7978217601776123 s
+global step 400/804, epoch: 1, batch: 131, rank_id: 0, loss: 0.086836, lr: 0.0000558011, speed: 4.3514 step/s
+====================================================================================================
+eval loss: 0.423656, mcc: 0.6745712812528275, 
+eval done total : 0.7793354988098145 s
+global step 440/804, epoch: 1, batch: 171, rank_id: 0, loss: 0.136390, lr: 0.0000502762, speed: 4.3437 step/s
+====================================================================================================
+eval loss: 0.398206, mcc: 0.6923818944138798, 
+eval done total : 0.8159146308898926 s
+global step 480/804, epoch: 1, batch: 211, rank_id: 0, loss: 0.261499, lr: 0.0000447514, speed: 4.4179 step/s
+====================================================================================================
+eval loss: 0.417508, mcc: 0.6707864369052745, 
+eval done total : 0.7684993743896484 s
+global step 520/804, epoch: 1, batch: 251, rank_id: 0, loss: 0.103656, lr: 0.0000392265, speed: 4.4672 step/s
+====================================================================================================
+eval loss: 0.417554, mcc: 0.664145461224172, 
+eval done total : 0.7864820957183838 s
+global step 560/804, epoch: 2, batch: 23, rank_id: 0, loss: 0.195591, lr: 0.0000337017, speed: 4.4489 step/s
+====================================================================================================
+eval loss: 0.511548, mcc: 0.6530464576994947, 
+eval done total : 0.7718935012817383 s
+global step 600/804, epoch: 2, batch: 63, rank_id: 0, loss: 0.096675, lr: 0.0000281768, speed: 4.3553 step/s
+====================================================================================================
+eval loss: 0.523832, mcc: 0.6905453415270076, 
+eval done total : 0.785733699798584 s
+global step 640/804, epoch: 2, batch: 103, rank_id: 0, loss: 0.313875, lr: 0.0000226519, speed: 4.4484 step/s
+====================================================================================================
+eval loss: 0.539910, mcc: 0.6749447828206667, 
+eval done total : 0.8087708950042725 s
+global step 680/804, epoch: 2, batch: 143, rank_id: 0, loss: 0.079847, lr: 0.0000171271, speed: 4.3635 step/s
+====================================================================================================
+eval loss: 0.538368, mcc: 0.6795482238460389, 
+eval done total : 0.8241798877716064 s
+global step 720/804, epoch: 2, batch: 183, rank_id: 0, loss: 0.039836, lr: 0.0000116022, speed: 4.3356 step/s
+====================================================================================================
+eval loss: 0.535092, mcc: 0.6618939398663453, 
+eval done total : 0.7767775058746338 s
+global step 760/804, epoch: 2, batch: 223, rank_id: 0, loss: 0.048092, lr: 0.0000060773, speed: 4.4610 step/s
+====================================================================================================
+eval loss: 0.552916, mcc: 0.6492539342618789, 
+eval done total : 0.8040175437927246 s
+global step 800/804, epoch: 2, batch: 263, rank_id: 0, loss: 0.192113, lr: 0.0000005525, speed: 4.3023 step/s
+====================================================================================================
+eval loss: 0.537588, mcc: 0.656708330806228, 
+eval done total : 0.7768526077270508 s
+global step 804/804, epoch: 2, batch: 267, rank_id: 0, loss: 0.086109, lr: 0.0000000000, speed: 9.6679 step/s
+====================================================================================================
+eval loss: 0.537616, mcc: 0.656708330806228, 
+eval done total : 0.8330621719360352 s

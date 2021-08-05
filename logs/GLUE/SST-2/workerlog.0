@@ -1,0 +1,100 @@
+/usr/lib/python3/dist-packages/urllib3/util/selectors.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import namedtuple, Mapping
+/usr/lib/python3/dist-packages/urllib3/_collections.py:2: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, MutableMapping
+-----------  Configuration Arguments -----------
+adam_epsilon: 1e-06
+batch_size: 32
+device: gpu
+layer_lr_decay: 0.8
+learning_rate: 0.0001
+logging_steps: 400
+max_seq_length: 128
+max_steps: -1
+model_name_or_path: convbert-base
+model_type: convbert
+num_train_epochs: 3
+output_dir: sst-2
+save_steps: 400
+scheduler_type: linear
+seed: 42
+task_name: sst-2
+warmup_proportion: 0.1
+warmup_steps: 0
+weight_decay: 0.01
+------------------------------------------------
+2021-08-04 22:21:08,380-INFO: unique_endpoints {'127.0.0.1:48167'}
+[32m[2021-08-04 22:21:08,496] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/vocab.txt[0m
+2021-08-04 22:21:08,513-INFO: unique_endpoints {'127.0.0.1:48167'}
+[32m[2021-08-04 22:21:08,515] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/model_state.pdparams[0m
+W0804 22:21:08.516120  2460 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 8.6, Driver API Version: 11.4, Runtime API Version: 11.2
+W0804 22:21:08.518234  2460 device_context.cc:422] device: 0, cuDNN Version: 8.1.
+[32m[2021-08-04 22:21:11,232] [    INFO][0m - Weights of ConvBertForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias'][0m
+global step 400/6315, epoch: 0, batch: 399, rank_id: 0, loss: 0.205361, lr: 0.0000633914, speed: 6.9777 step/s
+====================================================================================================
+eval loss: 0.439749, acc: 0.9059633027522935, 
+eval done total : 0.8365676403045654 s
+global step 800/6315, epoch: 0, batch: 799, rank_id: 0, loss: 0.261746, lr: 0.0000970267, speed: 6.6433 step/s
+====================================================================================================
+eval loss: 0.301618, acc: 0.9311926605504587, 
+eval done total : 0.8903748989105225 s
+global step 1200/6315, epoch: 0, batch: 1199, rank_id: 0, loss: 0.158542, lr: 0.0000899894, speed: 6.6298 step/s
+====================================================================================================
+eval loss: 0.400349, acc: 0.9288990825688074, 
+eval done total : 0.9159801006317139 s
+global step 1600/6315, epoch: 0, batch: 1599, rank_id: 0, loss: 0.109169, lr: 0.0000829521, speed: 6.6991 step/s
+====================================================================================================
+eval loss: 0.344045, acc: 0.9334862385321101, 
+eval done total : 0.9238705635070801 s
+global step 2000/6315, epoch: 0, batch: 1999, rank_id: 0, loss: 0.185503, lr: 0.0000759148, speed: 6.6456 step/s
+====================================================================================================
+eval loss: 0.342643, acc: 0.930045871559633, 
+eval done total : 0.8968007564544678 s
+global step 2400/6315, epoch: 1, batch: 294, rank_id: 0, loss: 0.085295, lr: 0.0000688776, speed: 6.6912 step/s
+====================================================================================================
+eval loss: 0.325252, acc: 0.9380733944954128, 
+eval done total : 0.9057276248931885 s
+global step 2800/6315, epoch: 1, batch: 694, rank_id: 0, loss: 0.133064, lr: 0.0000618403, speed: 6.7101 step/s
+====================================================================================================
+eval loss: 0.341762, acc: 0.9461009174311926, 
+eval done total : 0.8992836475372314 s
+global step 3200/6315, epoch: 1, batch: 1094, rank_id: 0, loss: 0.034218, lr: 0.0000548030, speed: 6.7265 step/s
+====================================================================================================
+eval loss: 0.273336, acc: 0.9357798165137615, 
+eval done total : 0.9052290916442871 s
+global step 3600/6315, epoch: 1, batch: 1494, rank_id: 0, loss: 0.129088, lr: 0.0000477657, speed: 6.7025 step/s
+====================================================================================================
+eval loss: 0.316121, acc: 0.9357798165137615, 
+eval done total : 0.8764379024505615 s
+global step 4000/6315, epoch: 1, batch: 1894, rank_id: 0, loss: 0.054678, lr: 0.0000407284, speed: 6.7038 step/s
+====================================================================================================
+eval loss: 0.244872, acc: 0.9426605504587156, 
+eval done total : 0.8865289688110352 s
+global step 4400/6315, epoch: 2, batch: 189, rank_id: 0, loss: 0.092951, lr: 0.0000336911, speed: 6.7168 step/s
+====================================================================================================
+eval loss: 0.336113, acc: 0.9369266055045872, 
+eval done total : 0.8812103271484375 s
+global step 4800/6315, epoch: 2, batch: 589, rank_id: 0, loss: 0.026159, lr: 0.0000266538, speed: 6.7235 step/s
+====================================================================================================
+eval loss: 0.333292, acc: 0.9403669724770642, 
+eval done total : 0.886134147644043 s
+global step 5200/6315, epoch: 2, batch: 989, rank_id: 0, loss: 0.115560, lr: 0.0000196165, speed: 6.7186 step/s
+====================================================================================================
+eval loss: 0.221174, acc: 0.9403669724770642, 
+eval done total : 0.8930721282958984 s
+global step 5600/6315, epoch: 2, batch: 1389, rank_id: 0, loss: 0.093257, lr: 0.0000125792, speed: 6.6904 step/s
+====================================================================================================
+eval loss: 0.243531, acc: 0.9438073394495413, 
+eval done total : 0.887798547744751 s
+global step 6000/6315, epoch: 2, batch: 1789, rank_id: 0, loss: 0.065496, lr: 0.0000055419, speed: 6.7252 step/s
+====================================================================================================
+eval loss: 0.257830, acc: 0.9380733944954128, 
+eval done total : 0.8803839683532715 s
+global step 6315/6315, epoch: 2, batch: 2104, rank_id: 0, loss: 0.013797, lr: 0.0000000000, speed: 8.3679 step/s
+====================================================================================================
+eval loss: 0.251423, acc: 0.9392201834862385, 
+eval done total : 0.8851096630096436 s
+Traceback (most recent call last):
+  File "run_glue.py", line 496, in <module>
+    s
+NameError: name 's' is not defined

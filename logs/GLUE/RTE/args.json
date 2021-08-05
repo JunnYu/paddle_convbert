@@ -1,0 +1,21 @@
+{
+    "task_name": "rte",
+    "model_type": "convbert",
+    "model_name_or_path": "convbert-base",
+    "output_dir": "rte",
+    "scheduler_type": "linear",
+    "max_seq_length": 128,
+    "learning_rate": 0.0001,
+    "layer_lr_decay": 0.8,
+    "num_train_epochs": 10,
+    "logging_steps": 40,
+    "save_steps": 40,
+    "batch_size": 32,
+    "weight_decay": 0.01,
+    "warmup_steps": 0,
+    "warmup_proportion": 0.1,
+    "adam_epsilon": 1e-06,
+    "max_steps": -1,
+    "seed": 42,
+    "device": "gpu"
+}

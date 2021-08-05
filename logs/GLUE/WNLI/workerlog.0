@@ -1,0 +1,73 @@
+/usr/lib/python3/dist-packages/urllib3/util/selectors.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import namedtuple, Mapping
+/usr/lib/python3/dist-packages/urllib3/_collections.py:2: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, MutableMapping
+-----------  Configuration Arguments -----------
+adam_epsilon: 1e-06
+batch_size: 32
+device: gpu
+layer_lr_decay: 0.8
+learning_rate: 0.0001
+logging_steps: 20
+max_seq_length: 128
+max_steps: -1
+model_name_or_path: convbert-base
+model_type: convbert
+num_train_epochs: 10
+output_dir: wnli
+save_steps: 20
+scheduler_type: linear
+seed: 42
+task_name: wnli
+warmup_proportion: 0.1
+warmup_steps: 0
+weight_decay: 0.01
+------------------------------------------------
+2021-08-05 11:33:11,098-INFO: unique_endpoints {'127.0.0.1:55225'}
+[32m[2021-08-05 11:33:11,100] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/vocab.txt[0m
+2021-08-05 11:33:11,117-INFO: unique_endpoints {'127.0.0.1:55225'}
+[32m[2021-08-05 11:33:11,118] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/model_state.pdparams[0m
+W0805 11:33:11.119236   451 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 8.6, Driver API Version: 11.4, Runtime API Version: 11.2
+W0805 11:33:11.121336   451 device_context.cc:422] device: 0, cuDNN Version: 8.1.
+[32m[2021-08-05 11:33:13,631] [    INFO][0m - Weights of ConvBertForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias'][0m
+num_training_steps 200
+global step 20/200, epoch: 0, batch: 19, rank_id: 0, loss: 0.686216, lr: 0.0001000000, speed: 4.9311 step/s
+====================================================================================================
+eval loss: 0.688561, acc: 0.5633802816901409, 
+eval done total : 0.2917490005493164 s
+global step 40/200, epoch: 1, batch: 19, rank_id: 0, loss: 0.731421, lr: 0.0000888889, speed: 3.0669 step/s
+====================================================================================================
+eval loss: 0.718549, acc: 0.43661971830985913, 
+eval done total : 0.3154895305633545 s
+global step 60/200, epoch: 2, batch: 19, rank_id: 0, loss: 0.700118, lr: 0.0000777778, speed: 3.1408 step/s
+====================================================================================================
+eval loss: 0.696417, acc: 0.5633802816901409, 
+eval done total : 0.32621216773986816 s
+global step 80/200, epoch: 3, batch: 19, rank_id: 0, loss: 0.709127, lr: 0.0000666667, speed: 3.1195 step/s
+====================================================================================================
+eval loss: 0.726017, acc: 0.5492957746478874, 
+eval done total : 0.31301283836364746 s
+global step 100/200, epoch: 4, batch: 19, rank_id: 0, loss: 0.685538, lr: 0.0000555556, speed: 3.1878 step/s
+====================================================================================================
+eval loss: 0.744668, acc: 0.4647887323943662, 
+eval done total : 0.3201725482940674 s
+global step 120/200, epoch: 5, batch: 19, rank_id: 0, loss: 0.577425, lr: 0.0000444444, speed: 3.1539 step/s
+====================================================================================================
+eval loss: 1.009099, acc: 0.4507042253521127, 
+eval done total : 0.3108031749725342 s
+global step 140/200, epoch: 6, batch: 19, rank_id: 0, loss: 0.518576, lr: 0.0000333333, speed: 3.1854 step/s
+====================================================================================================
+eval loss: 1.392156, acc: 0.5211267605633803, 
+eval done total : 0.3145632743835449 s
+global step 160/200, epoch: 7, batch: 19, rank_id: 0, loss: 0.436548, lr: 0.0000222222, speed: 3.1370 step/s
+====================================================================================================
+eval loss: 1.664096, acc: 0.43661971830985913, 
+eval done total : 0.3578362464904785 s
+global step 180/200, epoch: 8, batch: 19, rank_id: 0, loss: 0.382134, lr: 0.0000111111, speed: 3.1914 step/s
+====================================================================================================
+eval loss: 1.797689, acc: 0.39436619718309857, 
+eval done total : 0.31013035774230957 s
+global step 200/200, epoch: 9, batch: 19, rank_id: 0, loss: 0.262659, lr: 0.0000000000, speed: 3.1774 step/s
+====================================================================================================
+eval loss: 1.798073, acc: 0.43661971830985913, 
+eval done total : 0.3220553398132324 s

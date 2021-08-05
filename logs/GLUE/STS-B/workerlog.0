@@ -1,0 +1,87 @@
+/usr/lib/python3/dist-packages/urllib3/util/selectors.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import namedtuple, Mapping
+/usr/lib/python3/dist-packages/urllib3/_collections.py:2: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
+  from collections import Mapping, MutableMapping
+-----------  Configuration Arguments -----------
+adam_epsilon: 1e-06
+batch_size: 32
+device: gpu
+layer_lr_decay: 0.8
+learning_rate: 0.0001
+logging_steps: 100
+max_seq_length: 128
+max_steps: -1
+model_name_or_path: convbert-base
+model_type: convbert
+num_train_epochs: 10
+output_dir: sts-b
+save_steps: 100
+scheduler_type: linear
+seed: 42
+task_name: sts-b
+warmup_proportion: 0.1
+warmup_steps: 0
+weight_decay: 0.01
+------------------------------------------------
+2021-08-04 22:44:34,255-INFO: unique_endpoints {'127.0.0.1:41013'}
+[32m[2021-08-04 22:44:34,269] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/vocab.txt[0m
+2021-08-04 22:44:34,286-INFO: unique_endpoints {'127.0.0.1:41013'}
+[32m[2021-08-04 22:44:34,289] [    INFO][0m - Already cached /root/.paddlenlp/models/convbert-base/model_state.pdparams[0m
+W0804 22:44:34.290591  3121 device_context.cc:404] Please NOTE: device: 0, GPU Compute Capability: 8.6, Driver API Version: 11.4, Runtime API Version: 11.2
+W0804 22:44:34.292711  3121 device_context.cc:422] device: 0, cuDNN Version: 8.1.
+[32m[2021-08-04 22:44:37,028] [    INFO][0m - Weights of ConvBertForSequenceClassification not initialized from pretrained model: ['classifier.dense.weight', 'classifier.dense.bias', 'classifier.out_proj.weight', 'classifier.out_proj.bias'][0m
+num_training_steps 1800
+global step 100/1800, epoch: 0, batch: 99, rank_id: 0, loss: 0.618935, lr: 0.0000555556, speed: 6.3262 step/s
+====================================================================================================
+eval loss: 1.534772, pearson: 0.7996842468257338, spearman: 0.8166495398442399, pearson and spearman: 0.8081668933349868, eval done total : 1.3463160991668701 s
+global step 200/1800, epoch: 1, batch: 19, rank_id: 0, loss: 0.419260, lr: 0.0000987654, speed: 5.1974 step/s
+====================================================================================================
+eval loss: 0.511925, pearson: 0.8870157887574097, spearman: 0.8888039861351049, pearson and spearman: 0.8879098874462573, eval done total : 1.390152931213379 s
+global step 300/1800, epoch: 1, batch: 119, rank_id: 0, loss: 0.338756, lr: 0.0000925926, speed: 5.2178 step/s
+====================================================================================================
+eval loss: 0.630929, pearson: 0.8969502349891583, spearman: 0.8982582338925484, pearson and spearman: 0.8976042344408534, eval done total : 1.3882124423980713 s
+global step 400/1800, epoch: 2, batch: 39, rank_id: 0, loss: 0.226005, lr: 0.0000864198, speed: 5.2780 step/s
+====================================================================================================
+eval loss: 0.592432, pearson: 0.9009005574974032, spearman: 0.8982578107812492, pearson and spearman: 0.8995791841393261, eval done total : 1.3742377758026123 s
+global step 500/1800, epoch: 2, batch: 139, rank_id: 0, loss: 0.190137, lr: 0.0000802469, speed: 5.2017 step/s
+====================================================================================================
+eval loss: 0.656381, pearson: 0.9077891956767072, spearman: 0.9048878688390528, pearson and spearman: 0.9063385322578801, eval done total : 1.3933122158050537 s
+global step 600/1800, epoch: 3, batch: 59, rank_id: 0, loss: 0.172636, lr: 0.0000740741, speed: 5.3131 step/s
+====================================================================================================
+eval loss: 0.688711, pearson: 0.9083623965294255, spearman: 0.9065746998109777, pearson and spearman: 0.9074685481702016, eval done total : 1.3856079578399658 s
+global step 700/1800, epoch: 3, batch: 159, rank_id: 0, loss: 0.176334, lr: 0.0000679012, speed: 5.2618 step/s
+====================================================================================================
+eval loss: 0.599235, pearson: 0.9076991899376854, spearman: 0.905134951615534, pearson and spearman: 0.9064170707766097, eval done total : 1.3980464935302734 s
+global step 800/1800, epoch: 4, batch: 79, rank_id: 0, loss: 0.081907, lr: 0.0000617284, speed: 5.2099 step/s
+====================================================================================================
+eval loss: 0.723550, pearson: 0.9068961151701435, spearman: 0.9032896103509379, pearson and spearman: 0.9050928627605407, eval done total : 1.4284398555755615 s
+global step 900/1800, epoch: 4, batch: 179, rank_id: 0, loss: 0.076669, lr: 0.0000555556, speed: 5.2765 step/s
+====================================================================================================
+eval loss: 0.660402, pearson: 0.9062781801170344, spearman: 0.902494473997544, pearson and spearman: 0.9043863270572892, eval done total : 1.3934860229492188 s
+global step 1000/1800, epoch: 5, batch: 99, rank_id: 0, loss: 0.110660, lr: 0.0000493827, speed: 5.3331 step/s
+====================================================================================================
+eval loss: 0.548947, pearson: 0.9077126173825476, spearman: 0.9042338987706217, pearson and spearman: 0.9059732580765847, eval done total : 1.3781788349151611 s
+global step 1100/1800, epoch: 6, batch: 19, rank_id: 0, loss: 0.089011, lr: 0.0000432099, speed: 5.2720 step/s
+====================================================================================================
+eval loss: 0.628464, pearson: 0.9067863666137534, spearman: 0.9042842774596789, pearson and spearman: 0.9055353220367162, eval done total : 1.3838798999786377 s
+global step 1200/1800, epoch: 6, batch: 119, rank_id: 0, loss: 0.099429, lr: 0.0000370370, speed: 5.2881 step/s
+====================================================================================================
+eval loss: 0.733981, pearson: 0.9056101014238311, spearman: 0.902425958411537, pearson and spearman: 0.9040180299176841, eval done total : 1.3740766048431396 s
+global step 1300/1800, epoch: 7, batch: 39, rank_id: 0, loss: 0.053957, lr: 0.0000308642, speed: 5.2519 step/s
+====================================================================================================
+eval loss: 0.669791, pearson: 0.9078049726744298, spearman: 0.9041499200666312, pearson and spearman: 0.9059774463705306, eval done total : 1.371755838394165 s
+global step 1400/1800, epoch: 7, batch: 139, rank_id: 0, loss: 0.058089, lr: 0.0000246914, speed: 5.2319 step/s
+====================================================================================================
+eval loss: 0.648668, pearson: 0.9063215570882525, spearman: 0.9031853685268305, pearson and spearman: 0.9047534628075415, eval done total : 1.3997797966003418 s
+global step 1500/1800, epoch: 8, batch: 59, rank_id: 0, loss: 0.081392, lr: 0.0000185185, speed: 5.2354 step/s
+====================================================================================================
+eval loss: 0.621253, pearson: 0.9069435408101176, spearman: 0.9035934113748495, pearson and spearman: 0.9052684760924836, eval done total : 1.3911716938018799 s
+global step 1600/1800, epoch: 8, batch: 159, rank_id: 0, loss: 0.076343, lr: 0.0000123457, speed: 5.2102 step/s
+====================================================================================================
+eval loss: 0.629606, pearson: 0.9063867364215932, spearman: 0.903018317785919, pearson and spearman: 0.9047025271037561, eval done total : 1.40452241897583 s
+global step 1700/1800, epoch: 9, batch: 79, rank_id: 0, loss: 0.077568, lr: 0.0000061728, speed: 5.3218 step/s
+====================================================================================================
+eval loss: 0.635130, pearson: 0.9058889764971181, spearman: 0.9025603904712847, pearson and spearman: 0.9042246834842014, eval done total : 1.4089834690093994 s
+global step 1800/1800, epoch: 9, batch: 179, rank_id: 0, loss: 0.066306, lr: 0.0000000000, speed: 5.2671 step/s
+====================================================================================================
+eval loss: 0.611181, pearson: 0.9061777420699246, spearman: 0.9030139266728563, pearson and spearman: 0.9045958343713905, eval done total : 1.3914220333099365 s
