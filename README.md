@@ -159,9 +159,8 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 
 **模型链接**(这个链接包含所有GLUE任务微调后的权重)
 
-链接：todo待上传 
-
-提取码：xxxx
+链接：https://pan.baidu.com/s/1-Pk3n7jJj3IjaXZYR_J-xw 
+提取码：zuif
 
 ##### （2）模型预测：
 ```bash
@@ -293,9 +292,8 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 
 ##### 模型链接
 
-链接：https://pan.baidu.com/s/14HW5m2za1Cqtw4gAFXo7nw 
-提取码：2bcm
-
+链接：https://pan.baidu.com/s/1s2W5BgBa0eqLywjDa6Kv8A 
+提取码：u0rn 
 
 # Reference
 
