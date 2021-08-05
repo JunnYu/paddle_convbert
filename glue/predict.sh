@@ -1,6 +1,6 @@
 # task name ["cola","sst-2","mrpc","sts-b","qqp","mnli", "rte", "qnli"]
 #[ ckpt_path如下
-# 'cola/best-cola_ft_model_800.pdparams',
+# 'cola/best-cola_ft_model_440.pdparams',
 # 'sst-2/best-sst-2_ft_model_2800.pdparams',
 # 'mrpc/best-mrpc_ft_model_320.pdparams',
 # 'sts-b/best-sts-b_ft_model_600.pdparams',

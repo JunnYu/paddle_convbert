@@ -157,15 +157,10 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 - `output_dir` 表示模型保存路径。
 - `device` 表示使用的设备类型。默认为GPU，可以配置为CPU、GPU、XPU。若希望使用多GPU训练，将其设置为GPU，同时环境变量CUDA_VISIBLE_DEVICES配置要使用的GPU id。
 
-训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）：
-
-```python
-dev acc  : 0.9320885960095185
-test acc : 0.933
-```
 **模型链接**(这个链接包含所有GLUE任务微调后的权重)
 
 链接：todo待上传 
+
 提取码：xxxx
 
 ##### （2）模型预测：
@@ -177,10 +172,24 @@ python run_predict.py --task_name qnli  --ckpt_path qnli/best-qnli_ft_model_6300
 # 完成后可以压缩template文件夹，然后提交到GLUE
 ```
 ##### （3）压缩template文件夹为zip文件，然后提交到[GLUE排行榜](https://gluebenchmark.com/leaderboard)：
-GLUE排行榜结果：
+###### GLUE排行榜结果：
 <p align="center">
     <img src="figure/glue.png" width="100%" />
 </p>
+
+###### GLUE开发集结果：
+| Model                          | cola  | sst2  | mrpc        | stsb             | qqp         | mnlim       | qnli | rte   | wnli  |
+|--------------------------------|-------|-------|-------------|------------------|-------------|-------------|------|-------|-------|
+|                                | mcc   | acc   | acc/f1      | pearson/spearman | acc/f1      | acc/f1      | acc  | acc   | acc   |
+| ConvBERT\-base\-Paddle\(Mine\) | 69\.2 | 94\.6 | 90\.4/93\.1 | 90\.8/90\.7      | 92\.0/89\.4 | 88\.1/87\.9 | 93   | 83\.4 | 56\.3 |
+
+
+
+###### GLUE测试集结果对比（论文中的结果）：
+| Model                          | cola  | sst-2  | mrpc  | sts-b  | qqp | mnlim | qnli  | rte   | avg      |
+|--------------------------------|-------|-------|-------|-------|-----|-------|-------|-------|----------|
+| ConvBERT\-base\-YiTu           | **67\.8** | **95\.7** | 88\.3 | **89\.7** | **90.0**  | **88\.3** | 93\.2 | 77\.9 | **86\.3625** |
+| ConvBERT\-base\-Paddle\(Mine\) | 66\.3 | 95\.4 | **88\.6** | 89\.2 | **90.0**  | 88\.2 | **93\.3** | **78\.2** | 86\.15   |
 
 #### 2、SQuAD v1.1
 
