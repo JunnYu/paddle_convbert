@@ -11,6 +11,8 @@
 我们为 BERT 配备了这种混合注意力设计并构建了一个ConvBERT模型。实验表明，ConvBERT 在各种下游任务中明显优于BERT及其变体，具有更低的训练成本和更少的模型参数。
 值得注意的是，ConvBERT-base 模型达到86.4GLUE分数，比ELECTRA-base高0.7，同时使用不到1/4的训练成本。
 
+本项目是 ConvBert 在 Paddle 2.x上的开源实现。
+
 ## 原论文效果
 <p align="center">
     <img src="figure/qnli.jpg" width="100%" />
@@ -19,21 +21,23 @@
     <img src="figure/squad.jpg" width="100%" />
 </p>
 
-本项目是 ConvBert 在 Paddle 2.x上的开源实现。
+## 环境安装
 
-## 快速开始
+| python | 3\.8             |
+|--------|------------------|
+| GPU    | RTX3090          |
+| 框架     | PaddlePaddle2\.1 |
+| Cuda   | 11\.2            |
+| Cudnn  | 8\.1\.1\.33\-1   |
 
-### 环境安装
+或者使用本次复现使用的云平台：https://gpushare.com/
+<p align="center">
+    <img src="figure/yunfuwuqi.jpg" width="100%" />
+</p>
 
 ```bash
-python：     3.8
-GPU:         RTX3090
-框架：       PaddlePaddle2.1
-cuda：       11.2
-cudnn：      8.1.1.33-1
-```
-
-~~~bash
+# 克隆本仓库
+git clone https://github.com/JunnYu/paddle_convbert
 # 进入paddlenlp目录
 cd paddlenlp
 # 本地安装
@@ -41,9 +45,11 @@ pip install -r requirements.txt
 pip install -e .
 # 返回初始目录
 cd ..
-~~~
+```
 
-### 模型精度对齐
+## 快速开始
+
+### （一）模型精度对齐
 运行`python compare.py`，对比huggingface与paddle之间的精度，我们可以发现精度的平均误差在10^-7量级，最大误差在10^-6量级。
 ```python
 python compare.py
@@ -58,11 +64,7 @@ python compare.py
 # max difference: tensor(8.1062e-06)
 ```
 
-### **数据准备**
-
-Fine-tuning和预训练使用GLUE数据，这部分Paddle已提供，在执行运行命令时会自动下载。
-
-### **模型预训练**
+### （二）模型预训练
 
 **特别注意**：预训练模型如果想要达到较好的效果，需要训练几乎全量的Book Corpus数据 和 Wikipedia Corpus数据，原始文本接近20G，建议用GPU进行预训练，最好4片GPU以上。如果资源较少，Paddle提供已经预训练好的模型进行Fine-tuning，可以直接跳转到下面：运行Fine-tuning-使用Paddle提供的预训练模型运行 Fine-tuning。
 
@@ -72,9 +74,9 @@ Fine-tuning和预训练使用GLUE数据，这部分Paddle已提供，在执行�
 export CUDA_VISIBLE_DEVICES="0"
 export DATA_DIR=./BookCorpus/
 
-python -u run_pretrain.py \
+python -m paddle.distributed.launch --gpus "0" run_pretrain.py \
     --model_type convbert \
-    --model_name_or_path convbert-medium-small \
+    --model_name_or_path convbert-small \
     --input_dir $DATA_DIR \
     --output_dir ./pretrain_model/ \
     --train_batch_size 64 \
@@ -110,31 +112,21 @@ python -u run_pretrain.py \
 - `use_amp` 表示是否开启混合精度(float16)进行训练，默认不开启。如果在命令中加上了--use_amp，则会开启。
 - `init_from_ckpt` 表示是否从某个checkpoint继续训练（断点恢复训练），默认不开启。如果在命令中加上了--init_from_ckpt，且 --model_name_or_path 配置的是路径，则会开启从某个checkpoint继续训练。例如下面的命令从第40000步的checkpoint继续训练：
 
-### **Fine-tuning**
+### （三）下游任务微调
 
-#### GLUE
-使用Paddle提供的预训练模型运行GLUE数据集的Fine-tuning训练
-`可以发现在GLUE排行榜上，与官方的得分相差0.1点。`
-GLUE排行榜地址：https://gluebenchmark.com/leaderboard
-<p align="center">
-    <img src="figure/glue.png" width="100%" />
-</p>
+#### 1、GLUE
+以QNLI数据集为例（对于其他GLUE任务，请参考logs/GLUE/对应task_name/args.json，该json有详细参数配置）
 
-
-
-#### QNLI
-
-使用Paddle提供的预训练模型运行QNLI数据集的Fine-tuning训练
-
+##### （1）模型微调：
 ```shell
 unset CUDA_VISIBLE_DEVICES
-# 确保处在qnli文件夹
-cd qnli
+# 确保处在glue文件夹
+cd glue
 # 运行训练
 python -m paddle.distributed.launch --gpus "0" run_glue.py \
     --model_type convbert \
     --model_name_or_path convbert-base \
-    --task_name QNLI \
+    --task_name qnli \
     --max_seq_length 128 \
     --batch_size 32   \
     --learning_rate 1e-4 \
@@ -146,13 +138,13 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
     --logging_steps 10 \
     --save_steps 100 \
     --seed 42 \
-    --output_dir QNLI/ \
+    --output_dir qnli/ \
     --device gpu
 ```
 其中参数释义如下：
 - `model_type` 指示了模型类型，当前支持BERT、ELECTRA、ERNIE、CONVBERT模型。
 - `model_name_or_path` 模型名称或者路径，其中convbert模型当前仅支持convbert-small、convbert-medium-small、convbert-base几种规格。
-- `task_name` 表示 Fine-tuning 的任务，当前支持CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE。
+- `task_name` 表示 Fine-tuning 的任务，当前支持CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE, WNLI。
 - `max_seq_length` 表示最大句子长度，超过该长度将被截断。
 - `batch_size` 表示每次迭代**每张卡**上的样本数目。
 - `learning_rate` 表示基础学习率大小，将于learning rate scheduler产生的值相乘作为当前学习率。
@@ -170,30 +162,26 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 dev acc  : 0.9320885960095185
 test acc : 0.933
 ```
-##### 模型链接
+**模型链接**(这个链接包含所有GLUE任务微调后的权重)
 
-链接：https://pan.baidu.com/s/1mtYxl8a7ExK7vENpSrb4Kg 
-提取码：f9uy
+链接：https://pan.baidu.com/s/1TJnc976TM694TEs9HgF66w 
+提取码：bt5m
 
-##### 提交结果至GLUE（其他GLUE任务没有使用ConvBERT跑，只跑了QNLI）
-
+##### （2）模型预测：
+```bash
+# 确保处在glue文件夹
+cd glue
+# 运行预测，请指定模型权重文件夹
+python run_predict.py --task_name qnli  --ckpt_path qnli/best-qnli_ft_model_6300.pdparams
+# 完成后可以压缩template文件夹，然后提交到GLUE
+```
+##### （3）压缩template文件夹为zip文件，然后提交到[GLUE排行榜](https://gluebenchmark.com/leaderboard)：
+GLUE排行榜结果：
 <p align="center">
-    <img src="figure/QNLI.png" width="100%" />
+    <img src="figure/glue.png" width="100%" />
 </p>
 
-```bash
-# 确保处在qnli文件夹
-cd qnli
-# 运行预测，请指定模型权重文件夹
-python qnli_predict.py \
-    --ckpt_path best-qnli_ft_model_6600.pdparams 
-   
-```
-运行完这个命令后，会将结果保存到template/QNLI.tsv之中，想要提交到GLUE的话，将这个template压缩成压缩包，然后提交。
-
-
-
-#### SQuAD v1.1
+#### 2、SQuAD v1.1
 
 使用Paddle提供的预训练模型运行SQuAD v1.1数据集的Fine-tuning
 
@@ -241,11 +229,10 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 链接：https://pan.baidu.com/s/1TJnc976TM694TEs9HgF66w 
 提取码：bt5m
 
-#### SQuAD v2.0
-
+#### 3、SQuAD v2.0
 对于 SQuAD v2.0,按如下方式启动 Fine-tuning:
 
-~~~shell
+```shell
 unset CUDA_VISIBLE_DEVICES
 # 确保处在squad2.0文件夹
 cd squad2.0
@@ -269,13 +256,13 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
     --do_predict \
     --seed 42 \
     --version_2_with_negative
-~~~
+```
 
 * `version_2_with_negative`: 使用squad2.0数据集和评价指标的标志。
 
 训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）
 
-~~~python
+```python
 # global step = 14000
 {
   "exact": 80.94837025183189,
@@ -292,7 +279,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
   "best_f1": 83.96743280565195,
   "best_f1_thresh": -0.0010485649108886719
 }
-~~~
+```
 
 ##### 模型链接
 
