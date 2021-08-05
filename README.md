@@ -178,15 +178,15 @@ python run_predict.py --task_name qnli  --ckpt_path qnli/best-qnli_ft_model_6300
 </p>
 
 ###### GLUE开发集结果：
-| Model                          | cola  | sst2  | mrpc        | stsb             | qqp         | mnlim       | qnli | rte   | wnli  |
+| Model                          | cola  | sst-2  | mrpc        | sts-b             | qqp         | mnli       | qnli | rte   | wnli  |
 |--------------------------------|-------|-------|-------------|------------------|-------------|-------------|------|-------|-------|
-|                                | mcc   | acc   | acc/f1      | pearson/spearman | acc/f1      | acc/f1      | acc  | acc   | acc   |
+|                                | mcc   | acc   | acc/f1      | pearson/spearman | acc/f1      | acc(m/mm)      | acc  | acc   | acc   |
 | ConvBERT\-base\-Paddle\(Mine\) | 69\.2 | 94\.6 | 90\.4/93\.1 | 90\.8/90\.7      | 92\.0/89\.4 | 88\.1/87\.9 | 93   | 83\.4 | 56\.3 |
 
 
 
 ###### GLUE测试集结果对比（论文中的结果）：
-| Model                          | cola  | sst-2  | mrpc  | sts-b  | qqp | mnlim | qnli  | rte   | avg      |
+| Model                          | cola  | sst-2  | mrpc  | sts-b  | qqp | mnli-m | qnli  | rte   | avg      |
 |--------------------------------|-------|-------|-------|-------|-----|-------|-------|-------|----------|
 | ConvBERT\-base\-YiTu           | **67\.8** | **95\.7** | 88\.3 | **89\.7** | **90.0**  | **88\.3** | 93\.2 | 77\.9 | **86\.3625** |
 | ConvBERT\-base\-Paddle\(Mine\) | 66\.3 | 95\.4 | **88\.6** | 89\.2 | **90.0**  | 88\.2 | **93\.3** | **78\.2** | 86\.15   |
