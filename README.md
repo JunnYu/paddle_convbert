@@ -23,10 +23,11 @@
 
 ## 环境安装
 
-| python | 3\.8             |
+| 名称   | 值             |
 |--------|------------------|
+| python | 3\.8             |
 | GPU    | RTX3090          |
-| 框架     | PaddlePaddle2\.1 |
+| 框架    | PaddlePaddle2\.1 |
 | Cuda   | 11\.2            |
 | Cudnn  | 8\.1\.1\.33\-1   |
 
@@ -144,7 +145,7 @@ python -m paddle.distributed.launch --gpus "0" run_glue.py \
 其中参数释义如下：
 - `model_type` 指示了模型类型，当前支持BERT、ELECTRA、ERNIE、CONVBERT模型。
 - `model_name_or_path` 模型名称或者路径，其中convbert模型当前仅支持convbert-small、convbert-medium-small、convbert-base几种规格。
-- `task_name` 表示 Fine-tuning 的任务，当前支持CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE, WNLI。
+- `task_name` 表示 Fine-tuning 的任务，当前支持CoLA、SST-2、MRPC、STS-B、QQP、MNLI、QNLI、RTE、 WNLI。
 - `max_seq_length` 表示最大句子长度，超过该长度将被截断。
 - `batch_size` 表示每次迭代**每张卡**上的样本数目。
 - `learning_rate` 表示基础学习率大小，将于learning rate scheduler产生的值相乘作为当前学习率。
@@ -164,8 +165,8 @@ test acc : 0.933
 ```
 **模型链接**(这个链接包含所有GLUE任务微调后的权重)
 
-链接：https://pan.baidu.com/s/1TJnc976TM694TEs9HgF66w 
-提取码：bt5m
+链接：todo待上传 
+提取码：xxxx
 
 ##### （2）模型预测：
 ```bash
