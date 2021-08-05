@@ -115,6 +115,7 @@ python -u run_pretrain.py \
 #### GLUE
 使用Paddle提供的预训练模型运行GLUE数据集的Fine-tuning训练
 `可以发现在GLUE排行榜上，与官方的得分相差0.1点。`
+GLUE排行榜地址：https://gluebenchmark.com/leaderboard
 <p align="center">
     <img src="figure/glue.png" width="100%" />
 </p>
