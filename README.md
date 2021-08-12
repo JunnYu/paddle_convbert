@@ -222,6 +222,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）
 
 ```python
+# 注意：paddlenlp的tokenizer的offset mapping有误,存在BUG!!!!!!，该结果有点低！！！！！。
 # gloabl step = 9500
 {
   "exact": 84.46546830652791,
@@ -229,6 +230,16 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
   "total": 10570,
   "HasAns_exact": 84.46546830652791,
   "HasAns_f1": 90.9998989286406,
+  "HasAns_total": 10570
+}
+
+# 这是使用 python evaluate.py运行得到的结果！！！
+{
+  "exact": 84.82497634815516,
+  "f1": 91.29326590096191,
+  "total": 10570,
+  "HasAns_exact": 84.82497634815516,
+  "HasAns_f1": 91.29326590096191,
   "HasAns_total": 10570
 }
 ```

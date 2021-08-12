@@ -1,0 +1,1 @@
+python evaluate.py --model_name_or_path /hy-tmp/convbert/paddle_convbert/v1-81.5/squad/best-model_9500 --batch_size 16
