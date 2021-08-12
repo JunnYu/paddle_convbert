@@ -1,0 +1,1 @@
+python evaluate.py --model_name_or_path /hy-tmp/convbert/v2-80.9/squad/80.9best-model_14000 --batch_size 16 --version_2_with_negative

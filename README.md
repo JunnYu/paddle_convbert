@@ -233,7 +233,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
   "HasAns_total": 10570
 }
 
-# 这是使用 python evaluate.py运行得到的结果！！！
+# 这是使用 python evaluate.py运行得到的结果！！！这个结果才是正确的！！！！！
 {
   "exact": 84.82497634815516,
   "f1": 91.29326590096191,
@@ -283,6 +283,7 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
 训练过程中模型会自动对结果进行评估，其中最好的结果如下所示：（详细训练可查看logs文件夹）
 
 ```python
+# 注意：paddlenlp的tokenizer的offset mapping有误,存在BUG!!!!!!，该结果有点低！！！！！。
 # global step = 14000
 {
   "exact": 80.94837025183189,
@@ -298,6 +299,23 @@ python -m paddle.distributed.launch --gpus "0" run_squad.py \
   "best_exact_thresh": -0.5712471008300781,
   "best_f1": 83.96743280565195,
   "best_f1_thresh": -0.0010485649108886719
+}
+
+# 这是使用 python evaluate.py运行得到的结果！！！这个结果才是正确的！！！！！
+{
+  "exact": 80.9062578960667,
+  "f1": 83.90042392251083,
+  "total": 11873,
+  "HasAns_exact": 75.10121457489879,
+  "HasAns_f1": 81.09813313629743,
+  "HasAns_total": 5928,
+  "NoAns_exact": 86.69470142977292,
+  "NoAns_f1": 86.69470142977292,
+  "NoAns_total": 5945,
+  "best_exact": 81.23473427103512,
+  "best_exact_thresh": -0.7430887222290039,
+  "best_f1": 84.1231432489553,
+  "best_f1_thresh": -0.7430887222290039
 }
 ```
 
